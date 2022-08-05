@@ -1,0 +1,6 @@
+name: coingecko
+jobs:
+  ping:
+    steps:
+      - uri: wrap://fs/./build
+        method: ping

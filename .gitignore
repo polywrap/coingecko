@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Project
+wrap
+build
+.polywrap
+target
+__pycache__
+.vscode

@@ -1,0 +1,297 @@
+#import * from "./types.graphql"
+
+type Module {
+    """
+    CoinGecko API V3
+    """
+  
+  ping: Ping
+  """
+  Check API server status
+  """
+  
+  simplePrice(
+      """
+      Get the current price of any cryptocurrencies in any other supported currencies that you need.
+      """
+    ids: String!
+    vs_currencies: String!
+    include_market_cap: String
+    include_24hr_vol: String
+    include_24hr_change: String
+    include_last_updated_at: String
+  ): SimplePrice
+  
+  simpleTokenPrice(
+      """
+      Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
+      """
+    id: String!
+    contract_addresses: String!
+    vs_currencies: String!
+    include_market_cap: String
+    include_24hr_vol: String
+    include_24hr_change: String
+    include_last_updated_at: String
+  ): SimpleTokenPrice
+  
+  simpleSupportedVsCurrencies: SimpleSupportedVsCurrencies
+  """
+  Get list of supported_vs_currencies.
+  """
+  
+  coinsList(
+      """
+      List all supported coins id, name and symbol (no pagination required)
+      """
+    include_platform: Boolean
+  ): CoinsList
+  
+  coinsMarkets(
+      """
+      List all supported coins price, market cap, volume, and market related data
+      """
+    vs_currency: String!
+    ids: String
+    category: String
+    order: String
+    per_page: Int
+    page: Int
+    sparkline: Boolean
+    price_change_percentage: String
+  ): CoinsMarkets
+  
+  coins(
+      """
+      Get current data (name, price, market, ... including exchange tickers) for a coin
+      """
+    id: String!
+    localization: String
+    tickers: Boolean
+    market_data: Boolean
+    community_data: Boolean
+    developer_data: Boolean
+    sparkline: Boolean
+  ): Coins
+  
+  coinsTickers(
+      """
+      Get coin tickers (paginated to 100 items)
+      """
+    id: String!
+    exchange_ids: String
+    include_exchange_logo: String
+    page: Int
+    order: String
+    depth: String
+  ): CoinsTickers
+  
+  coinsHistory(
+      """
+      Get historical data (name, price, market, stats) at a given date for a coin
+      """
+    id: String!
+    date: String!
+    localization: String
+  ): CoinsHistory
+  
+  coinsMarketChart(
+      """
+      Get historical market data include price, market cap, and 24h volume (granularity auto)
+      """
+    id: String!
+    vs_currency: String!
+    days: String!
+    interval: String
+  ): CoinsMarketChart
+  
+  coinsMarketChartRange(
+      """
+      Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+      """
+    id: String!
+    vs_currency: String!
+    from: String!
+    to: String!
+  ): CoinsMarketChartRange
+  
+  coinsContract(
+      """
+      Get coin info from contract address
+      """
+    id: String!
+    contract_address: String!
+  ): CoinsContract
+  
+  coinsContractMarketChart(
+      """
+      Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+      """
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    days: String!
+  ): CoinsContractMarketChart
+  
+  coinsContractMarketChartRange(
+      """
+      Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+      """
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    from: String!
+    to: String!
+  ): CoinsContractMarketChartRange
+  
+  coinsOhlc(
+      """
+      Get coin's OHLC
+      """
+    id: String!
+    vs_currency: String!
+    days: String!
+  ): CoinsOhlc
+  
+  assetPlatforms: AssetPlatforms
+  """
+  List all asset platforms (Blockchain networks)
+  """
+  
+  coinsCategoriesList: CoinsCategoriesList
+  """
+  List all categories
+  """
+  
+  coinsCategories(
+      """
+      List all categories with market data
+      """
+    order: String
+  ): CoinsCategories
+  
+  exchanges(
+      """
+      List all exchanges (Active with trading volumes)
+      """
+    per_page: Int
+    page: String
+  ): Exchanges
+  
+  exchangesList: ExchangesList
+  """
+  List all supported markets id and name (no pagination required)
+  """
+  
+  exchanges(
+      """
+      Get exchange volume in BTC and top 100 tickers only
+      """
+    id: String!
+  ): Exchanges
+  
+  exchangesTickers(
+      """
+      Get exchange tickers (paginated, 100 tickers per page)
+      """
+    id: String!
+    coin_ids: String
+    include_exchange_logo: String
+    page: Int
+    depth: String
+    order: String
+  ): ExchangesTickers
+  
+  indexes(
+      """
+      List all market indexes
+      """
+    per_page: Int
+    page: Int
+  ): Indexes
+  
+  indexes(
+      """
+      get market index by market id and index id
+      """
+    market_id: String!
+    id: String!
+  ): Indexes
+  
+  indexesList: IndexesList
+  """
+  list market indexes id and name
+  """
+  
+  derivatives(
+      """
+      List all derivative tickers
+      """
+    include_tickers: String
+  ): Derivatives
+  
+  derivativesExchanges(
+      """
+      List all derivative exchanges
+      """
+    order: String
+    per_page: Int
+    page: Int
+  ): DerivativesExchanges
+  
+  derivativesExchanges(
+      """
+      show derivative exchange data
+      """
+    id: String!
+    include_tickers: String
+  ): DerivativesExchanges
+  
+  derivativesExchangesList: DerivativesExchangesList
+  """
+  List all derivative exchanges name and identifier
+  """
+  
+  exchangesVolumeChart(
+      """
+      Get volume_chart data for a given exchange
+      """
+    id: String!
+    days: Int!
+  ): ExchangesVolumeChart
+  
+  exchangeRates: ExchangeRates
+  """
+  Get BTC-to-Currency exchange rates
+  """
+  
+  search(
+      """
+      Search for coins, categories and markets on CoinGecko
+      """
+    query: String!
+  ): Search
+  
+  searchTrending: SearchTrending
+  """
+  Get trending search coins (Top-7) on CoinGecko in the last 24 hours
+  """
+  
+  global: Global
+  """
+  Get cryptocurrency global data
+  """
+  
+  globalDecentralizedFinanceDefi: GlobalDecentralizedFinanceDefi
+  """
+  Get cryptocurrency global decentralized finance(defi) data
+  """
+  
+  companiesPublicTreasury(
+      """
+      Get public companies data
+      """
+    coin_id: String!
+  ): CompaniesPublicTreasury
+
+}

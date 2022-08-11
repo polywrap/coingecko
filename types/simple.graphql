@@ -1,0 +1,378 @@
+# ---------------------------------------------
+#  /simple/price and /simple/token_price/{id}
+# ---------------------------------------------
+type Price {
+    btc: BigNumber
+    btc_market_cap: BigNumber
+    #[serde(rename = "btc_24h_vol")]
+    btc24_h_vol: BigNumber
+    #[serde(rename = "btc_24h_change")]
+    btc24_h_change: BigNumber
+    eth: BigNumber
+    eth_market_cap: BigNumber
+    #[serde(rename = "eth_24h_vol")]
+    eth24_h_vol: BigNumber
+    #[serde(rename = "eth_24h_change")]
+    eth24_h_change: BigNumber
+    ltc: BigNumber
+    ltc_market_cap: BigNumber
+    #[serde(rename = "ltc_24h_vol")]
+    ltc24_h_vol: BigNumber
+    #[serde(rename = "ltc_24h_change")]
+    ltc24_h_change: BigNumber
+    bch: BigNumber
+    bch_market_cap: BigNumber
+    #[serde(rename = "bch_24h_vol")]
+    bch24_h_vol: BigNumber
+    #[serde(rename = "bch_24h_change")]
+    bch24_h_change: BigNumber
+    bnb: BigNumber
+    bnb_market_cap: BigNumber
+    #[serde(rename = "bnb_24h_vol")]
+    bnb24_h_vol: BigNumber
+    #[serde(rename = "bnb_24h_change")]
+    bnb24_h_change: BigNumber
+    eos: BigNumber
+    eos_market_cap: BigNumber
+    #[serde(rename = "eos_24h_vol")]
+    eos24_h_vol: BigNumber
+    #[serde(rename = "eos_24h_change")]
+    eos24_h_change: BigNumber
+    xrp: BigNumber
+    xrp_market_cap: BigNumber
+    #[serde(rename = "xrp_24h_vol")]
+    xrp24_h_vol: BigNumber
+    #[serde(rename = "xrp_24h_change")]
+    xrp24_h_change: BigNumber
+    xlm: BigNumber
+    xlm_market_cap: BigNumber
+    #[serde(rename = "xlm_24h_vol")]
+    xlm24_h_vol: BigNumber
+    #[serde(rename = "xlm_24h_change")]
+    xlm24_h_change: BigNumber
+    link: BigNumber
+    link_market_cap: BigNumber
+    #[serde(rename = "link_24h_vol")]
+    link24_h_vol: BigNumber
+    #[serde(rename = "link_24h_change")]
+    link24_h_change: BigNumber
+    dot: BigNumber
+    dot_market_cap: BigNumber
+    #[serde(rename = "dot_24h_vol")]
+    dot24_h_vol: BigNumber
+    #[serde(rename = "dot_24h_change")]
+    dot24_h_change: BigNumber
+    yfi: BigNumber
+    yfi_market_cap: BigNumber
+    #[serde(rename = "yfi_24h_vol")]
+    yfi24_h_vol: BigNumber
+    #[serde(rename = "yfi_24h_change")]
+    yfi24_h_change: BigNumber
+    usd: BigNumber
+    usd_market_cap: BigNumber
+    #[serde(rename = "usd_24h_vol")]
+    usd24_h_vol: BigNumber
+    #[serde(rename = "usd_24h_change")]
+    usd24_h_change: BigNumber
+    aed: BigNumber
+    aed_market_cap: BigNumber
+    #[serde(rename = "aed_24h_vol")]
+    aed24_h_vol: BigNumber
+    #[serde(rename = "aed_24h_change")]
+    aed24_h_change: BigNumber
+    ars: BigNumber
+    ars_market_cap: BigNumber
+    #[serde(rename = "ars_24h_vol")]
+    ars24_h_vol: BigNumber
+    #[serde(rename = "ars_24h_change")]
+    ars24_h_change: BigNumber
+    aud: BigNumber
+    aud_market_cap: BigNumber
+    #[serde(rename = "aud_24h_vol")]
+    aud24_h_vol: BigNumber
+    #[serde(rename = "aud_24h_change")]
+    aud24_h_change: BigNumber
+    bdt: BigNumber
+    bdt_market_cap: BigNumber
+    #[serde(rename = "bdt_24h_vol")]
+    bdt24_h_vol: BigNumber
+    #[serde(rename = "bdt_24h_change")]
+    bdt24_h_change: BigNumber
+    bhd: BigNumber
+    bhd_market_cap: BigNumber
+    #[serde(rename = "bhd_24h_vol")]
+    bhd24_h_vol: BigNumber
+    #[serde(rename = "bhd_24h_change")]
+    bhd24_h_change: BigNumber
+    bmd: BigNumber
+    bmd_market_cap: BigNumber
+    #[serde(rename = "bmd_24h_vol")]
+    bmd24_h_vol: BigNumber
+    #[serde(rename = "bmd_24h_change")]
+    bmd24_h_change: BigNumber
+    brl: BigNumber
+    brl_market_cap: BigNumber
+    #[serde(rename = "brl_24h_vol")]
+    brl24_h_vol: BigNumber
+    #[serde(rename = "brl_24h_change")]
+    brl24_h_change: BigNumber
+    cad: BigNumber
+    cad_market_cap: BigNumber
+    #[serde(rename = "cad_24h_vol")]
+    cad24_h_vol: BigNumber
+    #[serde(rename = "cad_24h_change")]
+    cad24_h_change: BigNumber
+    chf: BigNumber
+    chf_market_cap: BigNumber
+    #[serde(rename = "chf_24h_vol")]
+    chf24_h_vol: BigNumber
+    #[serde(rename = "chf_24h_change")]
+    chf24_h_change: BigNumber
+    clp: BigNumber
+    clp_market_cap: BigNumber
+    #[serde(rename = "clp_24h_vol")]
+    clp24_h_vol: BigNumber
+    #[serde(rename = "clp_24h_change")]
+    clp24_h_change: BigNumber
+    cny: BigNumber
+    cny_market_cap: BigNumber
+    #[serde(rename = "cny_24h_vol")]
+    cny24_h_vol: BigNumber
+    #[serde(rename = "cny_24h_change")]
+    cny24_h_change: BigNumber
+    czk: BigNumber
+    czk_market_cap: BigNumber
+    #[serde(rename = "czk_24h_vol")]
+    czk24_h_vol: BigNumber
+    #[serde(rename = "czk_24h_change")]
+    czk24_h_change: BigNumber
+    dkk: BigNumber
+    dkk_market_cap: BigNumber
+    #[serde(rename = "dkk_24h_vol")]
+    dkk24_h_vol: BigNumber
+    #[serde(rename = "dkk_24h_change")]
+    dkk24_h_change: BigNumber
+    eur: BigNumber
+    eur_market_cap: BigNumber
+    #[serde(rename = "eur_24h_vol")]
+    eur24_h_vol: BigNumber
+    #[serde(rename = "eur_24h_change")]
+    eur24_h_change: BigNumber
+    gbp: BigNumber
+    gbp_market_cap: BigNumber
+    #[serde(rename = "gbp_24h_vol")]
+    gbp24_h_vol: BigNumber
+    #[serde(rename = "gbp_24h_change")]
+    gbp24_h_change: BigNumber
+    hkd: BigNumber
+    hkd_market_cap: BigNumber
+    #[serde(rename = "hkd_24h_vol")]
+    hkd24_h_vol: BigNumber
+    #[serde(rename = "hkd_24h_change")]
+    hkd24_h_change: BigNumber
+    huf: BigNumber
+    huf_market_cap: BigNumber
+    #[serde(rename = "huf_24h_vol")]
+    huf24_h_vol: BigNumber
+    #[serde(rename = "huf_24h_change")]
+    huf24_h_change: BigNumber
+    idr: BigNumber
+    idr_market_cap: BigNumber
+    #[serde(rename = "idr_24h_vol")]
+    idr24_h_vol: BigNumber
+    #[serde(rename = "idr_24h_change")]
+    idr24_h_change: BigNumber
+    ils: BigNumber
+    ils_market_cap: BigNumber
+    #[serde(rename = "ils_24h_vol")]
+    ils24_h_vol: BigNumber
+    #[serde(rename = "ils_24h_change")]
+    ils24_h_change: BigNumber
+    inr: BigNumber
+    inr_market_cap: BigNumber
+    #[serde(rename = "inr_24h_vol")]
+    inr24_h_vol: BigNumber
+    #[serde(rename = "inr_24h_change")]
+    inr24_h_change: BigNumber
+    jpy: BigNumber
+    jpy_market_cap: BigNumber
+    #[serde(rename = "jpy_24h_vol")]
+    jpy24_h_vol: BigNumber
+    #[serde(rename = "jpy_24h_change")]
+    jpy24_h_change: BigNumber
+    krw: BigNumber
+    krw_market_cap: BigNumber
+    #[serde(rename = "krw_24h_vol")]
+    krw24_h_vol: BigNumber
+    #[serde(rename = "krw_24h_change")]
+    krw24_h_change: BigNumber
+    kwd: BigNumber
+    kwd_market_cap: BigNumber
+    #[serde(rename = "kwd_24h_vol")]
+    kwd24_h_vol: BigNumber
+    #[serde(rename = "kwd_24h_change")]
+    kwd24_h_change: BigNumber
+    lkr: BigNumber
+    lkr_market_cap: BigNumber
+    #[serde(rename = "lkr_24h_vol")]
+    lkr24_h_vol: BigNumber
+    #[serde(rename = "lkr_24h_change")]
+    lkr24_h_change: BigNumber
+    mmk: BigNumber
+    mmk_market_cap: BigNumber
+    #[serde(rename = "mmk_24h_vol")]
+    mmk24_h_vol: BigNumber
+    #[serde(rename = "mmk_24h_change")]
+    mmk24_h_change: BigNumber
+    mxn: BigNumber
+    mxn_market_cap: BigNumber
+    #[serde(rename = "mxn_24h_vol")]
+    mxn24_h_vol: BigNumber
+    #[serde(rename = "mxn_24h_change")]
+    mxn24_h_change: BigNumber
+    myr: BigNumber
+    myr_market_cap: BigNumber
+    #[serde(rename = "myr_24h_vol")]
+    myr24_h_vol: BigNumber
+    #[serde(rename = "myr_24h_change")]
+    myr24_h_change: BigNumber
+    ngn: BigNumber
+    ngn_market_cap: BigNumber
+    #[serde(rename = "ngn_24h_vol")]
+    ngn24_h_vol: BigNumber
+    #[serde(rename = "ngn_24h_change")]
+    ngn24_h_change: BigNumber
+    nok: BigNumber
+    nok_market_cap: BigNumber
+    #[serde(rename = "nok_24h_vol")]
+    nok24_h_vol: BigNumber
+    #[serde(rename = "nok_24h_change")]
+    nok24_h_change: BigNumber
+    nzd: BigNumber
+    nzd_market_cap: BigNumber
+    #[serde(rename = "nzd_24h_vol")]
+    nzd24_h_vol: BigNumber
+    #[serde(rename = "nzd_24h_change")]
+    nzd24_h_change: BigNumber
+    php: BigNumber
+    php_market_cap: BigNumber
+    #[serde(rename = "php_24h_vol")]
+    php24_h_vol: BigNumber
+    #[serde(rename = "php_24h_change")]
+    php24_h_change: BigNumber
+    pkr: BigNumber
+    pkr_market_cap: BigNumber
+    #[serde(rename = "pkr_24h_vol")]
+    pkr24_h_vol: BigNumber
+    #[serde(rename = "pkr_24h_change")]
+    pkr24_h_change: BigNumber
+    pln: BigNumber
+    pln_market_cap: BigNumber
+    #[serde(rename = "pln_24h_vol")]
+    pln24_h_vol: BigNumber
+    #[serde(rename = "pln_24h_change")]
+    pln24_h_change: BigNumber
+    rub: BigNumber
+    rub_market_cap: BigNumber
+    #[serde(rename = "rub_24h_vol")]
+    rub24_h_vol: BigNumber
+    #[serde(rename = "rub_24h_change")]
+    rub24_h_change: BigNumber
+    sar: BigNumber
+    sar_market_cap: BigNumber
+    #[serde(rename = "sar_24h_vol")]
+    sar24_h_vol: BigNumber
+    #[serde(rename = "sar_24h_change")]
+    sar24_h_change: BigNumber
+    sek: BigNumber
+    sek_market_cap: BigNumber
+    #[serde(rename = "sek_24h_vol")]
+    sek24_h_vol: BigNumber
+    #[serde(rename = "sek_24h_change")]
+    sek24_h_change: BigNumber
+    sgd: BigNumber
+    sgd_market_cap: BigNumber
+    #[serde(rename = "sgd_24h_vol")]
+    sgd24_h_vol: BigNumber
+    #[serde(rename = "sgd_24h_change")]
+    sgd24_h_change: BigNumber
+    thb: BigNumber
+    thb_market_cap: BigNumber
+    #[serde(rename = "thb_24h_vol")]
+    thb24_h_vol: BigNumber
+    #[serde(rename = "thb_24h_change")]
+    thb24_h_change: BigNumber
+    #[serde(rename = "try")]
+    try_field: BigNumber
+    try_market_cap: BigNumber
+    #[serde(rename = "try_24h_vol")]
+    try24_h_vol: BigNumber
+    #[serde(rename = "try_24h_change")]
+    try24_h_change: BigNumber
+    twd: BigNumber
+    twd_market_cap: BigNumber
+    #[serde(rename = "twd_24h_vol")]
+    twd24_h_vol: BigNumber
+    #[serde(rename = "twd_24h_change")]
+    twd24_h_change: BigNumber
+    uah: BigNumber
+    uah_market_cap: BigNumber
+    #[serde(rename = "uah_24h_vol")]
+    uah24_h_vol: BigNumber
+    #[serde(rename = "uah_24h_change")]
+    uah24_h_change: BigNumber
+    vef: BigNumber
+    vef_market_cap: BigNumber
+    #[serde(rename = "vef_24h_vol")]
+    vef24_h_vol: BigNumber
+    #[serde(rename = "vef_24h_change")]
+    vef24_h_change: BigNumber
+    vnd: BigNumber
+    vnd_market_cap: BigNumber
+    #[serde(rename = "vnd_24h_vol")]
+    vnd24_h_vol: BigNumber
+    #[serde(rename = "vnd_24h_change")]
+    vnd24_h_change: BigNumber
+    zar: BigNumber
+    zar_market_cap: BigNumber
+    #[serde(rename = "zar_24h_vol")]
+    zar24_h_vol: BigNumber
+    #[serde(rename = "zar_24h_change")]
+    zar24_h_change: BigNumber
+    xdr: BigNumber
+    xdr_market_cap: BigNumber
+    #[serde(rename = "xdr_24h_vol")]
+    xdr24_h_vol: BigNumber
+    #[serde(rename = "xdr_24h_change")]
+    xdr24_h_change: BigNumber
+    xag: BigNumber
+    xag_market_cap: BigNumber
+    #[serde(rename = "xag_24h_vol")]
+    xag24_h_vol: BigNumber
+    #[serde(rename = "xag_24h_change")]
+    xag24_h_change: BigNumber
+    xau: BigNumber
+    xau_market_cap: BigNumber
+    #[serde(rename = "xau_24h_vol")]
+    xau24_h_vol: BigNumber
+    #[serde(rename = "xau_24h_change")]
+    xau24_h_change: BigNumber
+    bits: BigNumber
+    bits_market_cap: BigNumber
+    #[serde(rename = "bits_24h_vol")]
+    bits24_h_vol: BigNumber
+    #[serde(rename = "bits_24h_change")]
+    bits24_h_change: BigNumber
+    sats: BigNumber
+    sats_market_cap: BigNumber
+    #[serde(rename = "sats_24h_vol")]
+    sats24_h_vol: BigNumber
+    #[serde(rename = "sats_24h_change")]
+    sats24_h_change: BigNumber
+    last_updated_at: Int
+}
+
+# ---------------------------------------------
+#  /simple/supported_vs_currencies
+# ---------------------------------------------
+type SupportedVsCurrencies = Vec<String>;

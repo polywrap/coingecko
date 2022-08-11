@@ -1,0 +1,19 @@
+# ---------------------------------------------
+#  /companies/public_treasury/{coin_id}
+# ---------------------------------------------
+type CompaniesPublicTreasury {
+  total_holdings: BigNumber!
+  total_value_usd: BigNumber!
+  market_cap_dominance: BigNumber!
+  companies: [Company!]!
+}
+
+type Company {
+  name: String!
+  symbol: String!
+  country: String!
+  total_holdings: BigNumber!
+  total_entry_value_usd: BigNumber!
+  total_current_value_usd: BigNumber!
+  percentage_of_total_supply: BigNumber!
+}

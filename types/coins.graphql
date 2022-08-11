@@ -71,12 +71,8 @@ type CoinMarketItem {
 ---------------------------------------------
 #  /coins/{id}
 # ---------------------------------------------
-type CoinsItem {
-    id: String,
-    symbol: String,
-    name: String,
+type CoinsItem implements CoinListItem {
     asset_platform_id: JSON!,
-    platforms: Map @annotate(type: "<String!, String>"),
     block_time_in_minutes: BigNumber,
     hashing_algorithm: JSON,
     categories: [String]!,

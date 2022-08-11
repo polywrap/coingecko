@@ -1,0 +1,79 @@
+#import * from "../common.graphql"
+
+# ---------------------------------------------
+#  /derivatives
+# ---------------------------------------------
+
+type Derivative {
+    market: String!
+    symbol: String!
+    index_id: String!
+    price: String!
+    #[serde(rename = "price_percentage_change_24h")]
+    price_percentage_change24_h: BigNumber!
+    contract_type: String!
+    index: BigNumber
+    basis: BigNumber!
+    spread: BigNumber
+    funding_rate: BigNumber!
+    open_interest: BigNumber
+    #[serde(rename = "volume_24h")]
+    volume24_h: BigNumber!
+    last_traded_at: Int!
+    expired_at: Int
+}
+
+type DerivativeExchange {
+    name: String!
+    id: String!
+    open_interest_btc: BigNumber
+    #[serde(rename = "trade_volume_24h_btc")]
+    trade_volume24_h_btc: String
+    number_of_perpetual_pairs: Int
+    number_of_futures_pairs: Int
+    image: String
+    year_established: Int
+    country: String
+    description: String
+    url: String
+}
+
+type DerivativeExchangeData {
+    name: String!
+    open_interest_btc: BigNumber!
+    #[serde(rename = "trade_volume_24h_btc")]
+    trade_volume24_h_btc: String!
+    number_of_perpetual_pairs: Int!
+    number_of_futures_pairs: Int!
+    image: String!
+    year_established: Int
+    country: String!
+    description: String!
+    url: String!
+    tickers: [DerivativeExchangeTicker!]!
+}
+
+type DerivativeExchangeTicker {
+    symbol: String!
+    base: String!
+    target: String!
+    trade_url: String!
+    contract_type: String!
+    last: BigNumber!
+    h24_percentage_change: BigNumber!
+    index: BigNumber
+    index_basis_percentage: BigNumber!
+    bid_ask_spread: BigNumber!
+    funding_rate: BigNumber!
+    open_interest_usd: BigNumber!
+    h24_volume: BigNumber!
+    converted_volume: ConvertedVolume!
+    converted_last: ConvertedLast!
+    last_traded: Int!
+    expired_at: Int
+}
+
+type DerivativeExchangeId {
+    name: String,
+    id: String,
+}

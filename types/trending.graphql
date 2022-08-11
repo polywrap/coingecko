@@ -1,0 +1,26 @@
+# ---------------------------------------------
+#  /search/trending
+# ---------------------------------------------
+#[derive(Serialize, Deserialize, Debug, Clone)]
+type Trending {
+    coins: [TrendingCoin],
+    exchanges: [Value],
+}
+#[derive(Serialize, Deserialize, Debug, Clone)]
+type TrendingCoin {
+    item: TrendingCoinMarketData,
+}
+#[derive(Serialize, Deserialize, Debug, Clone)]
+type TrendingCoinMarketData {
+    id: String!
+    coin_id: BigNumber!
+    name: String!
+    symbol: String!
+    market_cap_rank: BigNumber!
+    thumb: String!
+    small: String!
+    large: String!
+    slug: String!
+    price_btc: BigNumber!
+    score: BigNumber!
+}

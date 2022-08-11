@@ -1,0 +1,29 @@
+# ---------------------------------------------
+#  /indexes
+# ---------------------------------------------
+type Index {
+    name: String!
+    id: String!
+    market: String!
+    last: BigNumber
+    is_multi_asset_composite: Boolean
+}
+
+# ---------------------------------------------
+#  /index/{market_id}/{id}
+# ---------------------------------------------
+type MarketIndex {
+    name: String!
+    market: String!
+    last: BigNumber
+    is_multi_asset_composite: Boolean
+}
+
+# ---------------------------------------------
+#  /indexes/list
+# ---------------------------------------------
+#[derive(Serialize, Deserialize, Debug, Clone)]
+type IndexId {
+    name: String!
+    id: String!
+}

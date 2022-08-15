@@ -1,3 +1,6 @@
+# ---------------------------------------------
+#  /simple/price and /simple/token_price/{id}
+# ---------------------------------------------
 type SimplePrice {
     btc: BigNumber,
     btc_market_cap: BigNumber,

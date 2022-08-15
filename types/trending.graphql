@@ -1,16 +1,15 @@
 # ---------------------------------------------
 #  /search/trending
 # ---------------------------------------------
-#[derive(Serialize, Deserialize, Debug, Clone)]
-type Trending {
+type SearchTrending {
     coins: [TrendingCoin],
-    exchanges: [Value],
+    exchanges: [JSON!],
 }
-#[derive(Serialize, Deserialize, Debug, Clone)]
+
 type TrendingCoin {
-    item: TrendingCoinMarketData,
+    item: TrendingCoinMarketData
 }
-#[derive(Serialize, Deserialize, Debug, Clone)]
+
 type TrendingCoinMarketData {
     id: String!
     coin_id: BigNumber!

@@ -1,6 +1,10 @@
 #import { Ping } from "./types/ping.graphql"
 #import { SimplePrice } from "./types/simple.graphql"
-#import { Module,  } into Http from "wrap://ens/http.polywrap.eth"
+#import { CompaniesPublicTreasury } from "./types/companies.graphql"
+#import { GlobalDefi, Global } from "./types/global.graphql"
+#import { SearchTrending } from "./types/trending.graphql"
+#import { ExchangeRates } from "./types/exchange_rates.graphql"
+#import { Module } into Http from "wrap://ens/http.polywrap.eth"
 
 type Module {
     """
@@ -12,30 +16,30 @@ type Module {
   # """
   ping: Ping!
   
-  simplePrice(
-    """
-    Get the current price of any cryptocurrencies in any other supported currencies that you need.
-    """
-    ids: String!
-    vs_currencies: String!
-    include_market_cap: String
-    include_24hr_vol: String
-    include_24hr_change: String
-    include_last_updated_at: String
-  ): SimplePrice!
+  # simplePrice(
+  #   """
+  #   Get the current price of any cryptocurrencies in any other supported currencies that you need.
+  #   """
+  #   ids: String
+  #   vs_currencies: String
+  #   include_market_cap: String
+  #   include_24hr_vol: String
+  #   include_24hr_change: String
+  #   include_last_updated_at: String
+  # ): SimplePrice!
   
-  simpleTokenPrice(
-    """
-    Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
-    """
-    id: String!
-    contract_addresses: String!
-    vs_currencies: String!
-    include_market_cap: String
-    include_24hr_vol: String
-    include_24hr_change: String
-    include_last_updated_at: String
-  ): SimplePrice!
+  # simpleTokenPrice(
+  #   """
+  #   Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
+  #   """
+  #   id: String
+  #   contract_addresses: String
+  #   vs_currencies: String
+  #   include_market_cap: String
+  #   include_24hr_vol: String
+  #   include_24hr_change: String
+  #   include_last_updated_at: String
+  # ): SimplePrice!
   
   # simpleSupportedVsCurrencies: SimpleSupportedVsCurrencies
   
@@ -254,46 +258,46 @@ type Module {
   # List all derivative exchanges name and identifier
   # """
   
+  # """
+  # Get volume_chart data for a given exchange
+  # """
   # exchangesVolumeChart(
-  #     """
-  #     Get volume_chart data for a given exchange
-  #     """
   #   id: String!
   #   days: Int!
   # ): ExchangesVolumeChart
   
-  # exchangeRates: ExchangeRates
-  # """
-  # Get BTC-to-Currency exchange rates
-  # """
+  """
+  Get BTC-to-Currency exchange rates
+  """
+  exchangeRates: ExchangeRates!
   
+  # """
+  # Search for coins, categories and markets on CoinGecko
+  # """
   # search(
-  #     """
-  #     Search for coins, categories and markets on CoinGecko
-  #     """
   #   query: String!
   # ): Search
   
-  # searchTrending: SearchTrending
-  # """
-  # Get trending search coins (Top-7) on CoinGecko in the last 24 hours
-  # """
+  """
+  Get trending search coins (Top-7) on CoinGecko in the last 24 hours
+  """
+  searchTrending: SearchTrending!
   
-  # global: Global
-  # """
-  # Get cryptocurrency global data
-  # """
+  """
+  Get cryptocurrency global data
+  """
+  global: Global!
   
-  # globalDecentralizedFinanceDefi: GlobalDecentralizedFinanceDefi
-  # """
-  # Get cryptocurrency global decentralized finance(defi) data
-  # """
+  """
+  Get cryptocurrency global decentralized finance(defi) data
+  """
+  globalDecentralizedFinanceDefi: GlobalDefi!
   
-  # companiesPublicTreasury(
-  #     """
-  #     Get public companies data
-  #     """
-  #   coin_id: String!
-  # ): CompaniesPublicTreasury
+  """
+  Get public companies data
+  """
+  companiesPublicTreasury(
+    coin_id: String!
+  ): CompaniesPublicTreasury!
 
 }

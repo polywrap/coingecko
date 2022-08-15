@@ -2,12 +2,12 @@
 #  /exchange_rates
 # ---------------------------------------------
 type ExchangeRates {
-    rates: Map! @map(type: "Map<String!, ExchangeRateData>"),
+    rates: Map! @annotate(type: "Map<String!, ExchangeRateData>!")
 }
+
 type ExchangeRateData {
-    name: String!,
-    unit: String!,
-    value: BigNumber!,
-    #[serde(rename = "type")]
-    type_field: String!,
+    name: String!
+    unit: String!
+    value: BigNumber!
+    type: String!
 }

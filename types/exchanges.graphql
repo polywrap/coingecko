@@ -2,20 +2,18 @@
 #  /exchanges
 # ---------------------------------------------
 type Exchange {
-    id: String!,
-    name: String!,
-    year_established: BigNumber,
-    country: String,
-    description: String,
-    url: String,
-    image: String,
-    has_trading_incentive: Boolean,
-    trust_score: BigNumber,
-    trust_score_rank: BigNumber,
-    #[serde(rename = "trade_volume_24h_btc")]
-    trade_volume24_h_btc: BigNumber,
-    #[serde(rename = "trade_volume_24h_btc_normalized")]
-    trade_volume24_h_btc_normalized: BigNumber,
+    id: String!
+    name: String!
+    year_established: BigNumber
+    country: String
+    description: String
+    url: String
+    image: String
+    has_trading_incentive: Boolean
+    trust_score: BigNumber
+    trust_score_rank: BigNumber
+    trade_volume_24h_btc: BigNumber
+    trade_volume_24h_btc_normalized: BigNumber
 }
 
 # ---------------------------------------------

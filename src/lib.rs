@@ -4,10 +4,8 @@ pub use wrap::*;
 use polywrap_wasm_rs::JSON;
 use crate::imported::http_module;
 
-pub fn ping(args: ArgsPing) -> Ping {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-
-    ]);
+pub fn ping(_args: ArgsPing) -> Ping {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![]);
     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
         url: "https://api.coingecko.com/api/v3/ping".to_string(),
         request: Some(HttpRequest {
@@ -44,95 +42,95 @@ pub fn ping(args: ArgsPing) -> Ping {
 }
 
 
-pub fn simple_price(args: ArgsSimplePrice) -> SimplePrice {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "ids".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/simple/price".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
+// pub fn simple_price(args: ArgsSimplePrice) -> SimplePrice {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "ids".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/simple/price".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
 
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
 
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
 
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
 
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
 
 
-pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> SimplePrice {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "contract_addresses".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/simple/token_price/args.id".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
+// pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> SimplePrice {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "contract_addresses".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/simple/token_price/args.id".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
 
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
 
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
 
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
 
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
 
 
 // pub fn simpleSupportedVsCurrencies(args: ArgsSimpleSupportedVsCurrencies) -> SimpleSupportedVsCurrencies {
@@ -1263,44 +1261,44 @@ pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> SimplePrice {
 // }
 
 
-// pub fn exchangeRates(args: ArgsExchangeRates) -> ExchangeRates {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+pub fn exchange_rates(args: ArgsExchangeRates) -> ExchangeRates {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/exchange_rates".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/exchange_rates".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<ExchangeRates>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<ExchangeRates>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
 
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}
 
 
 // pub fn search(args: ArgsSearch) -> Search {
@@ -1343,161 +1341,161 @@ pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> SimplePrice {
 // }
 
 
-// pub fn searchTrending(args: ArgsSearchTrending) -> SearchTrending {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+pub fn search_trending(args: ArgsSearchTrending) -> SearchTrending {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/search/trending".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/search/trending".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<SearchTrending>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<SearchTrending>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
 
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
-
-
-// pub fn global(args: ArgsGlobal) -> Global {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/global".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
-
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
-
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
-
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Global>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
-
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}
 
 
-// pub fn globalDecentralizedFinanceDefi(args: ArgsGlobalDecentralizedFinanceDefi) -> GlobalDecentralizedFinanceDefi {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+pub fn global(args: ArgsGlobal) -> Global {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/global/decentralized_finance_defi".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/global".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<GlobalDecentralizedFinanceDefi>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<Global>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
 
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}
 
 
-// pub fn companiesPublicTreasury(args: ArgsCompaniesPublicTreasury) -> CompaniesPublicTreasury {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-//         HttpUrlParam { key: "coin_id".to_string(), value: "args.name".to_string() }
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/companies/public_treasury/args.coin_id".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+pub fn global_decentralized_finance_defi(args: ArgsGlobalDecentralizedFinanceDefi) -> GlobalDefi {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/global/decentralized_finance_defi".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<CompaniesPublicTreasury>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
 
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<GlobalDefi>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
+
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}
+
+
+pub fn companies_public_treasury(args: ArgsCompaniesPublicTreasury) -> CompaniesPublicTreasury {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+        HttpUrlParam { key: "coin_id".to_string(), value: "args.name".to_string() }
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/companies/public_treasury/args.coin_id".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
+
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
+
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
+
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<CompaniesPublicTreasury>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
+
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}

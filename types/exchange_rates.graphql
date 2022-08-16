@@ -2,7 +2,7 @@
 #  /exchange_rates
 # ---------------------------------------------
 type ExchangeRates {
-    rates: Map! @annotate(type: "Map<String!, ExchangeRateData>!")
+    rates: Map! @annotate(type: "Map<String!, ExchangeRateData!>!")
 }
 
 type ExchangeRateData {

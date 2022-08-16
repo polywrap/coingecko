@@ -1,5 +1,5 @@
 type Localization {
-    locales: Map! @map(type: "Map<String!, String>")
+    locales: Map @annotate(type: "Map<String!, String>")
 }
 
 type Image {

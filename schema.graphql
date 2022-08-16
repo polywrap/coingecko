@@ -2,6 +2,7 @@
 #import { SimplePrice } from "./types/simple.graphql"
 #import { CompaniesPublicTreasury } from "./types/companies.graphql"
 #import { GlobalDefi, Global } from "./types/global.graphql"
+#import { DerivativeExchangeId } from "./types/derivatives.graphql"
 #import { SearchTrending } from "./types/trending.graphql"
 #import { ExchangeRates } from "./types/exchange_rates.graphql"
 #import { Module } into Http from "wrap://ens/http.polywrap.eth"
@@ -253,10 +254,10 @@ type Module {
   #   include_tickers: String
   # ): DerivativesExchanges
   
-  # derivativesExchangesList: DerivativesExchangesList
   # """
   # List all derivative exchanges name and identifier
   # """
+  derivativesExchangesList: [DerivativeExchangeId!]!
   
   # """
   # Get volume_chart data for a given exchange

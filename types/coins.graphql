@@ -8,13 +8,13 @@ type CoinListItem {
   id: String!
   symbol: String!
   name: String!
-  platforms: Map @annotate(type: "Map<String!, String>")
+  platforms: Map! @annotate(type: "Map<String!, String>!")
 }
 
 #---------------------------------------------
 #  /coins/markets
 # ---------------------------------------------
-type SparklineIn7d {
+type SparklineIn7D {
     price: BigNumber!
 }
 
@@ -51,7 +51,7 @@ type CoinMarketItem {
     roi: JSON!,
     last_updated: String,
     #[serde(rename = "sparkline_in_7d")]
-    sparkline_in7_d: OptionSparklineIn7D,
+    sparkline_in7_d: SparklineIn7D,
     #[serde(rename = "price_change_percentage_14d_in_currency")]
     price_change_percentage14_d_in_currency: BigNumber,
     #[serde(rename = "price_change_percentage_1h_in_currency")]
@@ -68,7 +68,7 @@ type CoinMarketItem {
     price_change_percentage7_d_in_currency: BigNumber,
 }
 
----------------------------------------------
+# ---------------------------------------------
 #  /coins/{id}
 # ---------------------------------------------
 type CoinsItem implements CoinListItem {
@@ -242,9 +242,9 @@ type HistoryMarketData {
 }
 
 type MarketChart {
-    prices:[[Bignumber!]!]!
-    market_caps: [[Bignumber!]!]!
-    total_volumes: [[Bignumber!]!]!
+    prices:[[BigNumber!]!]!
+    market_caps: [[BigNumber!]!]!
+    total_volumes: [[BigNumber!]!]!
 }
 
 type Contract implements CoinListItem {
@@ -280,17 +280,17 @@ type Contract implements CoinListItem {
 }
 
 
-# ---------------------------------------------
-#  /coins/categories/list
-# ---------------------------------------------
+# # ---------------------------------------------
+# #  /coins/categories/list
+# # ---------------------------------------------
 type CategoryId {
     category_id: String!
     name: String!
 }
 
-# ---------------------------------------------
-#  /coins/categories
-# ---------------------------------------------
+# # ---------------------------------------------
+# #  /coins/categories
+# # ---------------------------------------------
 type Category {
     id: String!
     name: String!

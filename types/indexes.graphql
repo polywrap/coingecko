@@ -22,7 +22,6 @@ type MarketIndex {
 # ---------------------------------------------
 #  /indexes/list
 # ---------------------------------------------
-#[derive(Serialize, Deserialize, Debug, Clone)]
 type IndexId {
     name: String!
     id: String!

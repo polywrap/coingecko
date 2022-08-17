@@ -2,9 +2,14 @@
 #import { SimplePrice } from "./types/simple.graphql"
 #import { CompaniesPublicTreasury } from "./types/companies.graphql"
 #import { GlobalDefi, Global } from "./types/global.graphql"
-#import { DerivativeExchangeId } from "./types/derivatives.graphql"
+#import { DerivativeExchangeId, Derivative } from "./types/derivatives.graphql"
 #import { SearchTrending } from "./types/trending.graphql"
+#import { IndexId, MarketIndex, Index } from "./types/indexes.graphql"
 #import { ExchangeRates } from "./types/exchange_rates.graphql"
+#import { ExchangeId, Exchange } from "./types/exchanges.graphql"
+#import { Category, CategoryId, Contract, MarketChart, History, CoinMarketItem, CoinsItem } from "./types/coins.graphql"
+#import { AssetPlatform } from "./types/asset_platform.graphql"
+#import { Tickers } from "./types/common.graphql"
 #import { Module } into Http from "wrap://ens/http.polywrap.eth"
 
 type Module {
@@ -42,217 +47,217 @@ type Module {
   #   include_last_updated_at: String
   # ): SimplePrice!
   
+  """
+  Get list of supported_vs_currencies.
+  """
   # simpleSupportedVsCurrencies: SimpleSupportedVsCurrencies
   
-  # """
-  # Get list of supported_vs_currencies.
-  # """
-  # coinsList(
-  #     """
-  #     List all supported coins id, name and symbol (no pagination required)
-  #     """
-  #   include_platform: Boolean
-  # ): CoinsList
+  coinsList(
+      """
+      List all supported coins id, name and symbol (no pagination required)
+      """
+    include_platform: Boolean
+  ): [CoinListItem!]!
   
-  # coinsMarkets(
-  #     """
-  #     List all supported coins price, market cap, volume, and market related data
-  #     """
-  #   vs_currency: String!
-  #   ids: String
-  #   category: String
-  #   order: String
-  #   per_page: Int
-  #   page: Int
-  #   sparkline: Boolean
-  #   price_change_percentage: String
-  # ): CoinsMarkets
+  """
+  List all supported coins price, market cap, volume, and market related data
+  """
+  coinsMarkets(
+    vs_currency: String!
+    ids: String
+    category: String
+    order: String
+    per_page: Int
+    page: Int
+    sparkline: Boolean
+    price_change_percentage: String
+  ): [CoinMarketItem!]!
   
-  # coins(
-  #     """
-  #     Get current data (name, price, market, ... including exchange tickers) for a coin
-  #     """
-  #   id: String!
-  #   localization: String
-  #   tickers: Boolean
-  #   market_data: Boolean
-  #   community_data: Boolean
-  #   developer_data: Boolean
-  #   sparkline: Boolean
-  # ): Coins
+  """
+  Get current data (name, price, market, ... including exchange tickers) for a coin
+  """
+  coin(
+    id: String!
+    localization: String
+    tickers: Boolean
+    market_data: Boolean
+    community_data: Boolean
+    developer_data: Boolean
+    sparkline: Boolean
+  ): CoinsItem!
   
-  # coinsTickers(
-  #     """
-  #     Get coin tickers (paginated to 100 items)
-  #     """
-  #   id: String!
-  #   exchange_ids: String
-  #   include_exchange_logo: String
-  #   page: Int
-  #   order: String
-  #   depth: String
-  # ): CoinsTickers
+  """
+  Get coin tickers (paginated to 100 items)
+  """
+  coinsTickers(
+    id: String!
+    exchange_ids: String
+    include_exchange_logo: String
+    page: Int
+    order: String
+    depth: String
+  ): Tickers!
   
-  # coinsHistory(
-  #     """
-  #     Get historical data (name, price, market, stats) at a given date for a coin
-  #     """
-  #   id: String!
-  #   date: String!
-  #   localization: String
-  # ): CoinsHistory
+  """
+  Get historical data (name, price, market, stats) at a given date for a coin
+  """
+  coinsHistory(
+    id: String!
+    date: String!
+    localization: String
+  ): History!
   
-  # coinsMarketChart(
-  #     """
-  #     Get historical market data include price, market cap, and 24h volume (granularity auto)
-  #     """
-  #   id: String!
-  #   vs_currency: String!
-  #   days: String!
-  #   interval: String
-  # ): CoinsMarketChart
+  """
+  Get historical market data include price, market cap, and 24h volume (granularity auto)
+  """
+  coinsMarketChart(
+    id: String!
+    vs_currency: String!
+    days: String!
+    interval: String
+  ): MarketChart!
   
-  # coinsMarketChartRange(
-  #     """
-  #     Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
-  #     """
-  #   id: String!
-  #   vs_currency: String!
-  #   from: String!
-  #   to: String!
-  # ): CoinsMarketChartRange
+  """
+  Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+  """
+  coinsMarketChartRange(
+    id: String!
+    vs_currency: String!
+    from: String!
+    to: String!
+  ): MarketChart!
   
-  # coinsContract(
-  #     """
-  #     Get coin info from contract address
-  #     """
-  #   id: String!
-  #   contract_address: String!
-  # ): CoinsContract
+  """
+  Get coin info from contract address
+  """
+  coinsContract(
+    id: String!
+    contract_address: String!
+  ): Contract!
   
-  # coinsContractMarketChart(
-  #     """
-  #     Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
-  #     """
-  #   id: String!
-  #   contract_address: String!
-  #   vs_currency: String!
-  #   days: String!
-  # ): CoinsContractMarketChart
+  """
+  Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+  """
+  coinsContractMarketChart(
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    days: String!
+  ): MarketChart!
   
-  # coinsContractMarketChartRange(
-  #     """
-  #     Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
-  #     """
-  #   id: String!
-  #   contract_address: String!
-  #   vs_currency: String!
-  #   from: String!
-  #   to: String!
-  # ): CoinsContractMarketChartRange
+  """
+  Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+  """
+  coinsContractMarketChartRange(
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    from: String!
+    to: String!
+  ): Contract!
   
-  # coinsOhlc(
-  #     """
-  #     Get coin's OHLC
-  #     """
-  #   id: String!
-  #   vs_currency: String!
-  #   days: String!
-  # ): CoinsOhlc
+  """
+  Get coin's OHLC
+  """
+  coinsOhlc(
+    id: String!
+    vs_currency: String!
+    days: String!
+  ): [[BigNumber!]!]!
   
-  # assetPlatforms: AssetPlatforms
-  # """
-  # List all asset platforms (Blockchain networks)
-  # """
+  """
+  List all asset platforms (Blockchain networks)
+  """
+  assetPlatforms: [AssetPlatform!]!
   
-  # coinsCategoriesList: CoinsCategoriesList
-  # """
-  # List all categories
-  # """
+  """
+  List all categories
+  """
+  coinsCategoriesList: [CategoryId!]!
   
-  # coinsCategories(
-  #     """
-  #     List all categories with market data
-  #     """
-  #   order: String
-  # ): CoinsCategories
+  """
+  List all categories with market data
+  """
+  coinsCategories(
+    order: String
+  ): [Category!]!
   
-  # exchanges(
-  #     """
-  #     List all exchanges (Active with trading volumes)
-  #     """
-  #   per_page: Int
-  #   page: String
-  # ): Exchanges
+  """
+  List all exchanges (Active with trading volumes)
+  """
+  exchanges(
+    per_page: Int
+    page: String
+  ): [Exchange!]!
   
-  # exchangesList: ExchangesList
-  # """
-  # List all supported markets id and name (no pagination required)
-  # """
+  """
+  List all supported markets id and name (no pagination required)
+  """
+  exchangesList: [ExchangeId!]!
   
-  # exchanges(
-  #     """
-  #     Get exchange volume in BTC and top 100 tickers only
-  #     """
-  #   id: String!
-  # ): Exchanges
+  exchange(
+      """
+      Get exchange volume in BTC and top 100 tickers only
+      """
+    id: String!
+  ): Exchange!
   
-  # exchangesTickers(
-  #     """
-  #     Get exchange tickers (paginated, 100 tickers per page)
-  #     """
-  #   id: String!
-  #   coin_ids: String
-  #   include_exchange_logo: String
-  #   page: Int
-  #   depth: String
-  #   order: String
-  # ): ExchangesTickers
+  """
+  Get exchange tickers (paginated, 100 tickers per page)
+  """
+  exchangesTickers(
+    id: String!
+    coin_ids: String
+    include_exchange_logo: String
+    page: Int
+    depth: String
+    order: String
+  ): Tickers!
   
-  # indexes(
-  #     """
-  #     List all market indexes
-  #     """
-  #   per_page: Int
-  #   page: Int
-  # ): Indexes
+  """
+  List all market indexes
+  """
+  indexes(
+    per_page: Int
+    page: Int
+  ): [Index!]!
   
-  # indexes(
-  #     """
-  #     get market index by market id and index id
-  #     """
-  #   market_id: String!
-  #   id: String!
-  # ): Indexes
+  """
+  get market index by market id and index id
+  """
+  marketIndexes(
+    market_id: String!
+    id: String!
+  ): MarketIndex!
   
-  # indexesList: IndexesList
-  # """
-  # list market indexes id and name
-  # """
+  """
+  list market indexes id and name
+  """
+  indexesList: [IndexId!]!
   
-  # derivatives(
-  #     """
-  #     List all derivative tickers
-  #     """
-  #   include_tickers: String
-  # ): Derivatives
+  """
+  List all derivative tickers
+  """
+  derivatives(
+    include_tickers: String
+  ): [Derivative!]!
   
-  # derivativesExchanges(
-  #     """
-  #     List all derivative exchanges
-  #     """
-  #   order: String
-  #   per_page: Int
-  #   page: Int
-  # ): DerivativesExchanges
+  """
+  List all derivative exchanges
+  """
+  derivativesExchanges(
+    order: String
+    per_page: Int
+    page: Int
+  ): [Derivative!]!
   
-  # derivativesExchanges(
-  #     """
-  #     show derivative exchange data
-  #     """
-  #   id: String!
-  #   include_tickers: String
-  # ): DerivativesExchanges
+  """
+  show derivative exchange data
+  """
+  derivativesExchange(
+    id: String!
+    include_tickers: String
+  ): Derivative!
   
   # """
   # List all derivative exchanges name and identifier

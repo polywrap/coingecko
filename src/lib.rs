@@ -1,7 +1,7 @@
 pub mod wrap;
 
 pub use wrap::*;
-use polywrap_wasm_rs::{JSON,BigNumber};
+use polywrap_wasm_rs::{JSON,BigNumber,Map};
 use crate::imported::http_module;
 
 pub fn ping(_args: ArgsPing) -> Ping {
@@ -87,7 +87,7 @@ pub fn ping(_args: ArgsPing) -> Ping {
 // }
 
 
-// pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> SimplePrice {
+// pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> Map<String, SimplePrice> {
 //     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 //         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
 //         HttpUrlParam { key: "contract_addresses".to_string(), value: "args.name".to_string() },
@@ -124,7 +124,7 @@ pub fn ping(_args: ArgsPing) -> Ping {
 //     // handle json rpc success
 //     if http_response.status >= 200 && http_response.status <= 299 {
 //         return match http_response.body {
-//             Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
+//             Some(v) => JSON::from_str::<Map<String, SimplePrice>>(&v).unwrap(),
 //             None => panic!("Missing response with successful HTTP status {}", http_response.status)
 //         };
 //     }
@@ -133,44 +133,44 @@ pub fn ping(_args: ArgsPing) -> Ping {
 // }
 
 
-// pub fn simpleSupportedVsCurrencies(args: ArgsSimpleSupportedVsCurrencies) -> SimpleSupportedVsCurrencies {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+pub fn simple_supported_vs_currencies(args: ArgsSimpleSupportedVsCurrencies) -> Vec<String> {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/simple/supported_vs_currencies".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    ]);
+    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/simple/supported_vs_currencies".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: url_params,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    }) {
+        Ok(Some(v)) => v,
+        Ok(None) => panic!("Did not receive HTTP response"),
+        Err(e) => panic!("{}", e),
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string()
-//         };
+    // handle json rpc error
+    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+        let response_body: String = match http_response.body {
+            Some(v) => v,
+            None => "An unknown error occurred!".to_string()
+        };
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+        panic!("Error {}: {}", http_response.status, response_body)
+    }
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<SimpleSupportedVsCurrencies>(&v).unwrap(),
-//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return match http_response.body {
+            Some(v) => JSON::from_str::<Vec<String>>(&v).unwrap(),
+            None => panic!("Missing response with successful HTTP status {}", http_response.status)
+        };
+    }
 
-//     panic!("Unexpected HTTP response with status: {}", http_response.status);
-// }
+    panic!("Unexpected HTTP response with status: {}", http_response.status);
+}
 
 
 pub fn coins_list(args: ArgsCoinsList) -> Vec<CoinListItem> {

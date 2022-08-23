@@ -78,7 +78,7 @@ type CoinsItem implements CoinListItem {
     categories: [String]!,
     public_notice: JSON!,
     additional_notices: [JSON!]!,
-    localization: Localization,
+    localization: Map! @annotate(type: "Map<String!, String>!")
     description: Description,
     links: Links,
     image: Image,
@@ -227,7 +227,7 @@ type History {
   id: String!
   symbol: String!
   name: String!
-  localication: Localization
+  localization: Map! @annotate(type: "Map<String!, String>!")
   image: Image!
   market_data: HistoryMarketData!
   community_data: CommunityData
@@ -254,7 +254,7 @@ type Contract implements CoinListItem {
     categories: [String!]!
     ic_notice: JSON!
     additional_notices: [JSON]
-    localization: Localization!
+    localization: Map! @annotate(type: "Map<String!, String>!")
     description: Description!
     links: Links!
     image: Image!

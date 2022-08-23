@@ -23,7 +23,7 @@ type Derivative {
 
 type DerivativeExchange {
     name: String!
-    id: String!
+    id: String
     open_interest_btc: BigNumber
     trade_volume_24h_btc: String
     number_of_perpetual_pairs: Int

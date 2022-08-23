@@ -1,7 +1,3 @@
-type Localization {
-    locales: Map! @annotate(type: "Map<String!, String>!")
-}
-
 type Image {
     thumb: String
     small: String

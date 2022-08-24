@@ -2,7 +2,7 @@
 #  /exchanges
 # ---------------------------------------------
 type Exchange {
-    id: String!
+    id: String
     name: String!
     year_established: BigNumber
     country: String

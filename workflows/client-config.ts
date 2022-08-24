@@ -45,7 +45,7 @@ export const requests = [
   {
     name: 'coinsTickers',
     url: '/api/v3/coins/bitcoin/tickers',
-    reply: '{"name": "Bitcoin", "tickers": [{"base": "BTC", "target": "USDT", "market": {"name": "BW.com", "identifier": "bw", "has_trading_incentive": False}, "last": 7963.0, "volume": 93428.7568, "converted_last": {"btc": 0.99993976, "eth": 31.711347, "usd": 7979.23}, "converted_volume": {"btc": 93423, "eth": 2962752, "usd": 745489919}, "bid_ask_spread_percentage": 0.111969, "timestamp": "2019-05-24T11:20:14+00:00", "is_anomaly": False, "is_stale": False, "trade_url": "https://www.bw.com/trade/btc_usdt", "coin_id": "bitcoin"}]}'
+    reply: '{"name": "Bitcoin", "tickers": [{"base": "BTC", "target": "USDT", "market": {"name": "BW.com", "identifier": "bw", "has_trading_incentive": false}, "last": 7963.0, "volume": 93428.7568, "converted_last": {"btc": 0.99993976, "eth": 31.711347, "usd": 7979.23}, "converted_volume": {"btc": 93423, "eth": 2962752, "usd": 745489919}, "bid_ask_spread_percentage": 0.111969, "timestamp": "2019-05-24T11:20:14+00:00", "is_anomaly": false, "is_stale": false, "trade_url": "https://www.bw.com/trade/btc_usdt", "coin_id": "bitcoin"}]}'
   },
   {
     name: 'coinsHistory',
@@ -100,7 +100,7 @@ export const requests = [
   {
     name: 'exchanges',
     url: /\/api\/v3\/exchanges$/
-    reply: '[ { "id": "bitforex", "name": "Bitforex", "description": "", "url": "https://www.bitforex.com/", "image": "https://assets.coingecko.com/markets/images/214/small/bitforex.jpg?1533199114", "has_trading_incentive": "true", "trade_volume_24h_btc": 680266.637119918 }, { "id": "binance", "name": "Binance", "description": "Binance is a China-based cryptocurrency exchange that lists most of the Chinese coins. It is a popular exchange for its huge number of Initial Coin Offering (ICO) listings and low fees.", "url": "https://www.binance.com/", "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250", "has_trading_incentive": "false", "trade_volume_24h_btc": 189744.350072168 } ]'
+    reply: '[ { "id": "bitforex", "name": "Bitforex", "description": "", "url": "https://www.bitforex.com/", "image": "https://assets.coingecko.com/markets/images/214/small/bitforex.jpg?1533199114", "has_trading_incentive": true, "trade_volume_24h_btc": 680266.637119918 }, { "id": "binance", "name": "Binance", "description": "Binance is a China-based cryptocurrency exchange that lists most of the Chinese coins. It is a popular exchange for its huge number of Initial Coin Offering (ICO) listings and low fees.", "url": "https://www.binance.com/", "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250", "has_trading_incentive": "false", "trade_volume_24h_btc": 189744.350072168 } ]'
   },
   {
     name: 'exchangesList',
@@ -110,12 +110,12 @@ export const requests = [
   {
     name: 'exchange',
     url: /\/api\/v3\/exchanges\/bitforex$/,
-    reply: '{ "name": "Bitforex", "has_trading_incentive": "true", "trade_volume_24h_btc": 680266.637119918, "tickers": [ { "base": "BTC", "target": "USDT", "market": { "name": "Bitforex", "identifier": "bitforex", "has_trading_incentive": "true" }, "last": 7039.55, "converted_last": { "btc": "1.001711841446200081963480716", "eth": "24.4986463149997536428213651518458101194944", "usd": "7043.71831205846008527901735024184383795812" }, "volume": 447378.73, "converted_volume": { "btc": "448144.5713519911718500979009072226084", "eth": "10960173.27267390510353832059421689917189597190216256", "usd": "3151209752.222085727501972469271259554059845134991788" }, "timestamp": "2018-08-28T12:46:25.719Z", "is_anomaly": "false" } ] }'
+    reply: '{ "name": "Bitforex", "has_trading_incentive": true, "trade_volume_24h_btc": 680266.637119918, "tickers": [ { "base": "BTC", "target": "USDT", "market": { "name": "Bitforex", "identifier": "bitforex", "has_trading_incentive": true }, "last": 7039.55, "converted_last": { "btc": "1.001711841446200081963480716", "eth": "24.4986463149997536428213651518458101194944", "usd": "7043.71831205846008527901735024184383795812" }, "volume": 447378.73, "converted_volume": { "btc": "448144.5713519911718500979009072226084", "eth": "10960173.27267390510353832059421689917189597190216256", "usd": "3151209752.222085727501972469271259554059845134991788" }, "timestamp": "2018-08-28T12:46:25.719Z", "is_anomaly": "false" } ] }'
   },
   {
     name: 'exchangesTickers',
     url: '/api/v3/exchanges/bitforex/tickers',
-    reply: '{"name": "Bitforex","tickers": [ { "base": "BTC", "target": "USDT", "market": { "name": "Bitforex", "identifier": "bitforex", "has_trading_incentive": false }, "last": 21045.11, "volume": 1981.1304, "converted_last": { "btc": 1.000083, "eth": 13.351148, "usd": 21032 }, "converted_volume": { "btc": 1981, "eth": 26450, "usd": 41666374 }, "trust_score": "green", "bid_ask_spread_percentage": 0.026771, "timestamp": "2022-08-23T06:41:44+00:00", "last_traded_at": "2022-08-23T06:41:44+00:00", "last_fetch_at": "2022-08-23T06:41:44+00:00", "is_anomaly": false, "is_stale": false, "trade_url": "https://www.bitforex.com/en/spot/btc_usdt", "token_info_url": null, "coin_id": "bitcoin", "target_coin_id": "tether" }]'
+      reply: '{"name": "Bitforex","tickers": [ { "base": "BTC", "target": "USDT", "market": { "name": "Bitforex", "identifier": "bitforex", "has_trading_incentive": false }, "last": 21045.11, "volume": 1981.1304, "converted_last": { "btc": 1.000083, "eth": 13.351148, "usd": 21032 }, "converted_volume": { "btc": 1981, "eth": 26450, "usd": 41666374 }, "trust_score": "green", "bid_ask_spread_percentage": 0.026771, "timestamp": "2022-08-23T06:41:44+00:00", "last_traded_at": "2022-08-23T06:41:44+00:00", "last_fetch_at": "2022-08-23T06:41:44+00:00", "is_anomaly": false, "is_stale": false, "trade_url": "https://www.bitforex.com/en/spot/btc_usdt", "token_info_url": null, "coin_id": "bitcoin", "target_coin_id": "tether" }]}'
   },
   {
     name: 'indexes',
@@ -170,6 +170,6 @@ export const requests = [
   {
     name: 'companiesPublicTreasury',
     url: '/api/v3/companies/public_treasury/bitcoin',
-    reply: '{ "total_holdings": 174374.4658, "total_value_usd": 3671364607.809375, "market_cap_dominance": 0.91, "companies": [{ "name": "Coinbase", "symbol": "NASDAQ: COIN", "country": "US", "total_holdings": 9000, "total_entry_value_usd": 173700000, "total_current_value_usd": 189490366, "percentage_of_total_supply": 0.043 }]'
+      reply: '{ "total_holdings": 174374.4658, "total_value_usd": 3671364607.809375, "market_cap_dominance": 0.91, "companies": [{ "name": "Coinbase", "symbol": "NASDAQ: COIN", "country": "US", "total_holdings": 9000, "total_entry_value_usd": 173700000, "total_current_value_usd": 189490366, "percentage_of_total_supply": 0.043 }]}'
   }
 ]

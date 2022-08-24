@@ -117,7 +117,7 @@ jobs:
   exchanges_tickers:
     steps:
       - uri: wrap://fs/./build
-        method: exchangesList
+        method: exchangesTickers
         args:
           id: "bitforex"
   # exchange_rates:

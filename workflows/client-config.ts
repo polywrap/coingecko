@@ -45,12 +45,12 @@ export const requests = [
   {
     name: 'coinsTickers',
     url: '/api/v3/coins/bitcoin/tickers',
-    reply: '{"name": "Bitcoin", "tickers": [{"base": "BTC", "target": "USDT", "market": {"name": "BW.com", "identifier": "bw", "has_trading_incentive": False}, "last": 7963.0, "    volume": 93428.7568, "converted_last": {"btc": 0.99993976, "eth": 31.711347, "usd": 7979.23}, "converted_volume": {"btc": 93423, "eth": 2962752, "usd": 745489919}, "    bid_ask_spread_percentage": 0.111969, "timestamp": "2019-05-24T11:20:14+00:00", "is_anomaly": False, "is_stale": False, "trade_url": "https://www.bw.com/trade/btc_us    dt", "coin_id": "bitcoin"}]}'
+    reply: '{"name": "Bitcoin", "tickers": [{"base": "BTC", "target": "USDT", "market": {"name": "BW.com", "identifier": "bw", "has_trading_incentive": False}, "last": 7963.0, "volume": 93428.7568, "converted_last": {"btc": 0.99993976, "eth": 31.711347, "usd": 7979.23}, "converted_volume": {"btc": 93423, "eth": 2962752, "usd": 745489919}, "bid_ask_spread_percentage": 0.111969, "timestamp": "2019-05-24T11:20:14+00:00", "is_anomaly": False, "is_stale": False, "trade_url": "https://www.bw.com/trade/btc_usdt", "coin_id": "bitcoin"}]}'
   },
   {
     name: 'coinsHistory',
     url: '/api/v3/coins/bitcoin/history?date=27-08-2018',
-      reply: '{ "id": "bitcoin", "symbol": "btc", "name": "Bitcoin", "localization": { "en": "Bitcoin", "es": "Bitcoin", "de": "Bitcoin", "nl": "Bitcoin", "pt": "Bitcoin", "fr": "Bitcoin", "it": "Bitcoin", "hu": "Bitcoin", "ro": "Bitcoin", "sv": "Bitcoin", "pl": "Bitcoin", "id": "Bitcoin", "zh": "比特币", "zh-tw": "比特幣", "ja": "ビットコイン", "ko": "비트코인", "ru": "биткоина", "ar": "بيتكوين", "th": "บิตคอยน์", "vi": "Bitcoin", "tr": "Bitcoin" }, "image": {}, "market_data": {}}'
+    reply: '{ "id": "bitcoin", "symbol": "btc", "name": "Bitcoin", "localization": { "en": "Bitcoin", "es": "Bitcoin", "de": "Bitcoin", "nl": "Bitcoin", "pt": "Bitcoin", "fr": "Bitcoin", "it": "Bitcoin", "hu": "Bitcoin", "ro": "Bitcoin", "sv": "Bitcoin", "pl": "Bitcoin", "id": "Bitcoin", "zh": "比特币", "zh-tw": "比特幣", "ja": "ビットコイン", "ko": "비트코인", "ru": "биткоина", "ar": "بيتكوين", "th": "บิตคอยน์", "vi": "Bitcoin", "tr": "Bitcoin" }, "image": {}, "market_data": {}}'
   }
   {
     name: 'coinsMarketChart',
@@ -99,7 +99,7 @@ export const requests = [
   },
   {
     name: 'exchanges',
-    url: '/api/v3/exchanges',
+    url: /\/api\/v3\/exchanges$/
     reply: '[ { "id": "bitforex", "name": "Bitforex", "description": "", "url": "https://www.bitforex.com/", "image": "https://assets.coingecko.com/markets/images/214/small/bitforex.jpg?1533199114", "has_trading_incentive": "true", "trade_volume_24h_btc": 680266.637119918 }, { "id": "binance", "name": "Binance", "description": "Binance is a China-based cryptocurrency exchange that lists most of the Chinese coins. It is a popular exchange for its huge number of Initial Coin Offering (ICO) listings and low fees.", "url": "https://www.binance.com/", "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250", "has_trading_incentive": "false", "trade_volume_24h_btc": 189744.350072168 } ]'
   },
   {
@@ -109,7 +109,7 @@ export const requests = [
   },
   {
     name: 'exchange',
-    url: '/api/v3/exchanges/bitforex',
+    url: /\/api\/v3\/exchanges\/bitforex$/,
     reply: '{ "name": "Bitforex", "has_trading_incentive": "true", "trade_volume_24h_btc": 680266.637119918, "tickers": [ { "base": "BTC", "target": "USDT", "market": { "name": "Bitforex", "identifier": "bitforex", "has_trading_incentive": "true" }, "last": 7039.55, "converted_last": { "btc": "1.001711841446200081963480716", "eth": "24.4986463149997536428213651518458101194944", "usd": "7043.71831205846008527901735024184383795812" }, "volume": 447378.73, "converted_volume": { "btc": "448144.5713519911718500979009072226084", "eth": "10960173.27267390510353832059421689917189597190216256", "usd": "3151209752.222085727501972469271259554059845134991788" }, "timestamp": "2018-08-28T12:46:25.719Z", "is_anomaly": "false" } ] }'
   },
   {

@@ -73,174 +73,174 @@ type Module {
     price_change_percentage: String
   ): [CoinMarketItem!]!
   
-  """
-  Get current data (name, price, market, ... including exchange tickers) for a coin
-  """
-  coin(
-    id: String!
-    localization: String
-    tickers: Boolean
-    market_data: Boolean
-    community_data: Boolean
-    developer_data: Boolean
-    sparkline: Boolean
-  ): CoinsItem!
+  # """
+  # Get current data (name, price, market, ... including exchange tickers) for a coin
+  # """
+  # coin(
+  #   id: String!
+  #   localization: String
+  #   tickers: Boolean
+  #   market_data: Boolean
+  #   community_data: Boolean
+  #   developer_data: Boolean
+  #   sparkline: Boolean
+  # ): CoinsItem!
   
-  """
-  Get coin tickers (paginated to 100 items)
-  """
-  coinsTickers(
-    id: String!
-    exchange_ids: String
-    include_exchange_logo: String
-    page: Int
-    order: String
-    depth: String
-  ): Tickers!
+  # """
+  # Get coin tickers (paginated to 100 items)
+  # """
+  # coinsTickers(
+  #   id: String!
+  #   exchange_ids: String
+  #   include_exchange_logo: String
+  #   page: Int
+  #   order: String
+  #   depth: String
+  # ): Tickers!
   
-  """
-  Get historical data (name, price, market, stats) at a given date for a coin
-  """
-  coinsHistory(
-    id: String!
-    date: String!
-    localization: String
-  ): History!
+  # """
+  # Get historical data (name, price, market, stats) at a given date for a coin
+  # """
+  # coinsHistory(
+  #   id: String!
+  #   date: String!
+  #   localization: String
+  # ): History!
   
-  """
-  Get historical market data include price, market cap, and 24h volume (granularity auto)
-  """
-  coinsMarketChart(
-    id: String!
-    vs_currency: String!
-    days: String!
-    interval: String
-  ): MarketChart!
+  # """
+  # Get historical market data include price, market cap, and 24h volume (granularity auto)
+  # """
+  # coinsMarketChart(
+  #   id: String!
+  #   vs_currency: String!
+  #   days: String!
+  #   interval: String
+  # ): MarketChart!
   
-  """
-  Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
-  """
-  coinsMarketChartRange(
-    id: String!
-    vs_currency: String!
-    from: String!
-    to: String!
-  ): MarketChart!
+  # """
+  # Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+  # """
+  # coinsMarketChartRange(
+  #   id: String!
+  #   vs_currency: String!
+  #   from: String!
+  #   to: String!
+  # ): MarketChart!
   
-  """
-  Get coin info from contract address
-  """
-  coinsContract(
-    id: String!
-    contract_address: String!
-  ): Contract!
+  # """
+  # Get coin info from contract address
+  # """
+  # coinsContract(
+  #   id: String!
+  #   contract_address: String!
+  # ): Contract!
   
-  """
-  Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
-  """
-  coinsContractMarketChart(
-    id: String!
-    contract_address: String!
-    vs_currency: String!
-    days: String!
-  ): MarketChart!
+  # """
+  # Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+  # """
+  # coinsContractMarketChart(
+  #   id: String!
+  #   contract_address: String!
+  #   vs_currency: String!
+  #   days: String!
+  # ): MarketChart!
   
-  """
-  Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
-  """
-  coinsContractMarketChartRange(
-    id: String!
-    contract_address: String!
-    vs_currency: String!
-    from: String!
-    to: String!
-  ): Contract!
+  # """
+  # Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+  # """
+  # coinsContractMarketChartRange(
+  #   id: String!
+  #   contract_address: String!
+  #   vs_currency: String!
+  #   from: String!
+  #   to: String!
+  # ): Contract!
   
-  """
-  Get coin's OHLC
-  """
-  coinsOhlc(
-    id: String!
-    vs_currency: String!
-    days: String!
-  ): [[BigNumber!]!]!
+  # """
+  # Get coin's OHLC
+  # """
+  # coinsOhlc(
+  #   id: String!
+  #   vs_currency: String!
+  #   days: String!
+  # ): [[BigNumber!]!]!
   
-  """
-  List all asset platforms (Blockchain networks)
-  """
-  assetPlatforms: [AssetPlatform!]!
+  # """
+  # List all asset platforms (Blockchain networks)
+  # """
+  # assetPlatforms: [AssetPlatform!]!
   
-  """
-  List all categories
-  """
-  coinsCategoriesList: [CategoryId!]!
+  # """
+  # List all categories
+  # """
+  # coinsCategoriesList: [CategoryId!]!
   
-  """
-  List all categories with market data
-  """
-  coinsCategories(
-    order: String
-  ): [Category!]!
+  # """
+  # List all categories with market data
+  # """
+  # coinsCategories(
+  #   order: String
+  # ): [Category!]!
   
-  """
-  List all exchanges (Active with trading volumes)
-  """
-  exchanges(
-    per_page: Int
-    page: String
-  ): [Exchange!]!
+  # """
+  # List all exchanges (Active with trading volumes)
+  # """
+  # exchanges(
+  #   per_page: Int
+  #   page: String
+  # ): [Exchange!]!
   
-  """
-  List all supported markets id and name (no pagination required)
-  """
-  exchangesList: [ExchangeId!]!
+  # """
+  # List all supported markets id and name (no pagination required)
+  # """
+  # exchangesList: [ExchangeId!]!
   
-  exchange(
-      """
-      Get exchange volume in BTC and top 100 tickers only
-      """
-    id: String!
-  ): Exchange!
+  # exchange(
+  #     """
+  #     Get exchange volume in BTC and top 100 tickers only
+  #     """
+  #   id: String!
+  # ): Exchange!
   
-  """
-  Get exchange tickers (paginated, 100 tickers per page)
-  """
-  exchangesTickers(
-    id: String!
-    coin_ids: String
-    include_exchange_logo: String
-    page: Int
-    depth: String
-    order: String
-  ): Tickers!
+  # """
+  # Get exchange tickers (paginated, 100 tickers per page)
+  # """
+  # exchangesTickers(
+  #   id: String!
+  #   coin_ids: String
+  #   include_exchange_logo: String
+  #   page: Int
+  #   depth: String
+  #   order: String
+  # ): Tickers!
   
-  """
-  List all market indexes
-  """
-  indexes(
-    per_page: Int
-    page: Int
-  ): [Index!]!
+  # """
+  # List all market indexes
+  # """
+  # indexes(
+  #   per_page: Int
+  #   page: Int
+  # ): [Index!]!
   
-  """
-  get market index by market id and index id
-  """
-  marketIndexes(
-    market_id: String!
-    id: String!
-  ): MarketIndex!
+  # """
+  # get market index by market id and index id
+  # """
+  # marketIndexes(
+  #   market_id: String!
+  #   id: String!
+  # ): MarketIndex!
   
-  """
-  list market indexes id and name
-  """
-  indexesList: [IndexId!]!
+  # """
+  # list market indexes id and name
+  # """
+  # indexesList: [IndexId!]!
   
-  """
-  List all derivative tickers
-  """
-  derivatives(
-    include_tickers: String
-  ): [Derivative!]!
+  # """
+  # List all derivative tickers
+  # """
+  # derivatives(
+  #   include_tickers: String
+  # ): [Derivative!]!
   
   """
   List all derivative exchanges
@@ -260,14 +260,18 @@ type Module {
   ): DerivativeExchange!
   
   # """
-  # List all derivative exchanges name and identifier
+  # List all derivative exchanges
   # """
-  derivativesExchangesList: [DerivativeExchangeId!]!
+  # derivativesExchanges(
+  #   order: String
+  #   per_page: Int
+  #   page: Int
+  # ): [Derivative!]!
   
   # """
-  # Get volume_chart data for a given exchange
+  # show derivative exchange data
   # """
-  # exchangesVolumeChart(
+  # derivativesExchange(
   #   id: String!
   #   days: Int!
   # ): ExchangesVolumeChart
@@ -280,30 +284,35 @@ type Module {
   # """
   # Search for coins, categories and markets on CoinGecko
   # """
-  # search(
-  #   query: String!
-  # ): Search
+  # exchangeRates: ExchangeRates!
   
-  """
-  Get trending search coins (Top-7) on CoinGecko in the last 24 hours
-  """
-  searchTrending: SearchTrending!
+  # # """
+  # # Search for coins, categories and markets on CoinGecko
+  # # """
+  # # search(
+  # #   query: String!
+  # # ): Search
   
-  """
-  Get cryptocurrency global data
-  """
-  global: Global!
+  # """
+  # Get trending search coins (Top-7) on CoinGecko in the last 24 hours
+  # """
+  # searchTrending: SearchTrending!
   
-  """
-  Get cryptocurrency global decentralized finance(defi) data
-  """
-  globalDecentralizedFinanceDefi: GlobalDefi!
+  # """
+  # Get cryptocurrency global data
+  # """
+  # global: Global!
   
-  """
-  Get public companies data
-  """
-  companiesPublicTreasury(
-    coin_id: String!
-  ): CompaniesPublicTreasury!
+  # """
+  # Get cryptocurrency global decentralized finance(defi) data
+  # """
+  # globalDecentralizedFinanceDefi: GlobalDefi!
+  
+  # """
+  # Get public companies data
+  # """
+  # companiesPublicTreasury(
+  #   coin_id: String!
+  # ): CompaniesPublicTreasury!
 
 }

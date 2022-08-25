@@ -15,10 +15,35 @@ describe("Coingecko", () => {
 
   const client: PolywrapClient = new PolywrapClient();
 
-  it("should ping coingecko api", async () => {
+  test("ping", async () => {
     const ping = await Coingecko_Module.ping({}, client, wrapperUri);
     expect(ping.error).toBeFalsy();
     expect(ping.data).toBeTruthy();
     expect(ping.data?.gecko_says).toStrictEqual("(V3) To the Moon!");
   });
+
+  test("simpleSupportedVsCurrencies", async () => {
+    const simpleSupportedVsCurrencies = await Coingecko_Module.simpleSupportedVsCurrencies({}, client, wrapperUri);
+    expect(simpleSupportedVsCurrencies.error).toBeFalsy();
+    expect(simpleSupportedVsCurrencies.data).toBeTruthy();
+    expect(simpleSupportedVsCurrencies.data?.length).toBeGreaterThan(0);
+  });
+
+  test("coinsList", async () => {
+    const coinsList = await Coingecko_Module.coinsList({include_platform: true}, client, wrapperUri);
+    expect(coinsList.error).toBeFalsy();
+    expect(coinsList.data).toBeTruthy();
+    expect(coinsList.data?.length).toBeGreaterThan(0);
+  });
+
+  test("coinMarkets", async () => {
+    const coinMarkets = await Coingecko_Module.coinsMarkets({vs_currency: "usd", ids: "ethereum"}, client, wrapperUri);
+    
+    console.log(coinMarkets);
+    expect(coinMarkets.error).toBeFalsy();
+    expect(coinMarkets.data).toBeTruthy();
+    expect(coinMarkets.data?.length).toBeGreaterThan(0);
+
+    console.log(coinMarkets);
+  })
 });

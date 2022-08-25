@@ -4,7 +4,7 @@
   "private": true,
   "version": "0.1.2",
   "scripts": {
-    "precodegen": "python3 ./scripts/generate.py",
+    "pycodegen": "python3 ./scripts/generate.py",
     "codegen": "npx polywrap codegen",
     "build": "npx polywrap build",
     "test:env:up": "npx polywrap infra up --modules=eth-ens-ipfs",

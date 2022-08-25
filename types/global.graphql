@@ -1,0 +1,34 @@
+# ---------------------------------------------
+#  /global
+# ---------------------------------------------
+type Global {
+    data: GlobalData!
+}
+type GlobalData {
+    active_cryptocurrencies: BigNumber!
+    upcoming_icos: BigNumber!
+    ongoing_icos: BigNumber!
+    ended_icos: BigNumber!
+    markets: BigNumber!
+    total_market_cap: Map! @annotate(type: "Map<String!, BigNumber!>!")
+    total_volume: Map! @annotate(type: "Map<String!, BigNumber!>!")
+    market_cap_percentage: Map! @annotate(type: "Map<String!, BigNumber!>!")
+    market_cap_change_percentage_24h_usd: BigNumber!
+    updated_at: BigNumber!
+}
+
+# ---------------------------------------------
+#  /global/decentralized_finance_defi
+# ---------------------------------------------
+type GlobalDefi {
+    data: GlobalDefiData!
+}
+type GlobalDefiData {
+    defi_market_cap: String!
+    eth_market_cap: String!
+    defi_to_eth_ratio: String!
+    trading_volume_24h: String!
+    defi_dominance: String!
+    top_coin_name: String!
+    top_coin_defi_dominance: BigNumber!
+}

@@ -1,13 +1,11 @@
 pub mod wrap;
 
 pub use wrap::*;
-use polywrap_wasm_rs::JSON;
+use polywrap_wasm_rs::{JSON,BigNumber,Map};
 use crate::imported::http_module;
 
-pub fn ping(args: ArgsPing) -> Ping {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-
-    ]);
+pub fn ping(_args: ArgsPing) -> Ping {
+    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![]);
     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
         url: "https://api.coingecko.com/api/v3/ping".to_string(),
         request: Some(HttpRequest {
@@ -44,98 +42,98 @@ pub fn ping(args: ArgsPing) -> Ping {
 }
 
 
-pub fn simplePrice(args: ArgsSimplePrice) -> SimplePrice {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "ids".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/simple/price".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
+// pub fn simple_price(args: ArgsSimplePrice) -> SimplePrice {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "ids".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/simple/price".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
 
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
 
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
 
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<SimplePrice>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
 
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
-
-
-pub fn simpleTokenPrice(args: ArgsSimpleTokenPrice) -> SimpleTokenPrice {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "contract_addresses".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/simple/token_price/args.id".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
-
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
-
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
-
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<SimpleTokenPrice>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
-
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
 
 
-pub fn simpleSupportedVsCurrencies(args: ArgsSimpleSupportedVsCurrencies) -> SimpleSupportedVsCurrencies {
+// pub fn simple_token_price(args: ArgsSimpleTokenPrice) -> Map<String, SimplePrice> {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "contract_addresses".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "vs_currencies".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_market_cap".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_vol".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_24hr_change".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "include_last_updated_at".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/simple/token_price/args.id".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
+
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
+
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
+
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<Map<String, SimplePrice>>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
+
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
+
+
+pub fn simple_supported_vs_currencies(args: ArgsSimpleSupportedVsCurrencies) -> Vec<String> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -166,7 +164,7 @@ pub fn simpleSupportedVsCurrencies(args: ArgsSimpleSupportedVsCurrencies) -> Sim
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<SimpleSupportedVsCurrencies>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<String>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -175,7 +173,7 @@ pub fn simpleSupportedVsCurrencies(args: ArgsSimpleSupportedVsCurrencies) -> Sim
 }
 
 
-pub fn coinsList(args: ArgsCoinsList) -> CoinsList {
+pub fn coins_list(args: ArgsCoinsList) -> Vec<CoinListItem> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "include_platform".to_string(), value: "args.name".to_string() }
     ]);
@@ -206,7 +204,7 @@ pub fn coinsList(args: ArgsCoinsList) -> CoinsList {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsList>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<CoinListItem>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -215,7 +213,7 @@ pub fn coinsList(args: ArgsCoinsList) -> CoinsList {
 }
 
 
-pub fn coinsMarkets(args: ArgsCoinsMarkets) -> CoinsMarkets {
+pub fn coins_markets(args: ArgsCoinsMarkets) -> Vec<CoinMarketItem> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "vs_currency".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "ids".to_string(), value: "args.name".to_string() },
@@ -253,7 +251,7 @@ pub fn coinsMarkets(args: ArgsCoinsMarkets) -> CoinsMarkets {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsMarkets>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<CoinMarketItem>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -262,7 +260,7 @@ pub fn coinsMarkets(args: ArgsCoinsMarkets) -> CoinsMarkets {
 }
 
 
-pub fn coins(args: ArgsCoins) -> Coins {
+pub fn coin(args: ArgsCoin) -> CoinsItem {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "localization".to_string(), value: "args.name".to_string() },
@@ -299,7 +297,7 @@ pub fn coins(args: ArgsCoins) -> Coins {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Coins>(&v).unwrap(),
+            Some(v) => JSON::from_str::<CoinsItem>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -308,7 +306,7 @@ pub fn coins(args: ArgsCoins) -> Coins {
 }
 
 
-pub fn coinsTickers(args: ArgsCoinsTickers) -> CoinsTickers {
+pub fn coins_tickers(args: ArgsCoinsTickers) -> Tickers {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "exchange_ids".to_string(), value: "args.name".to_string() },
@@ -344,7 +342,7 @@ pub fn coinsTickers(args: ArgsCoinsTickers) -> CoinsTickers {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsTickers>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Tickers>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -353,7 +351,7 @@ pub fn coinsTickers(args: ArgsCoinsTickers) -> CoinsTickers {
 }
 
 
-pub fn coinsHistory(args: ArgsCoinsHistory) -> CoinsHistory {
+pub fn coins_history(args: ArgsCoinsHistory) -> History {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "date".to_string(), value: "args.name".to_string() },
@@ -386,7 +384,7 @@ pub fn coinsHistory(args: ArgsCoinsHistory) -> CoinsHistory {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsHistory>(&v).unwrap(),
+            Some(v) => JSON::from_str::<History>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -395,7 +393,7 @@ pub fn coinsHistory(args: ArgsCoinsHistory) -> CoinsHistory {
 }
 
 
-pub fn coinsMarketChart(args: ArgsCoinsMarketChart) -> CoinsMarketChart {
+pub fn coins_market_chart(args: ArgsCoinsMarketChart) -> MarketChart {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "vs_currency".to_string(), value: "args.name".to_string() },
@@ -429,7 +427,7 @@ pub fn coinsMarketChart(args: ArgsCoinsMarketChart) -> CoinsMarketChart {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsMarketChart>(&v).unwrap(),
+            Some(v) => JSON::from_str::<MarketChart>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -438,7 +436,7 @@ pub fn coinsMarketChart(args: ArgsCoinsMarketChart) -> CoinsMarketChart {
 }
 
 
-pub fn coinsMarketChartRange(args: ArgsCoinsMarketChartRange) -> CoinsMarketChartRange {
+pub fn coins_market_chart_range(args: ArgsCoinsMarketChartRange) -> MarketChart {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "vs_currency".to_string(), value: "args.name".to_string() },
@@ -472,7 +470,7 @@ pub fn coinsMarketChartRange(args: ArgsCoinsMarketChartRange) -> CoinsMarketChar
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsMarketChartRange>(&v).unwrap(),
+            Some(v) => JSON::from_str::<MarketChart>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -481,7 +479,7 @@ pub fn coinsMarketChartRange(args: ArgsCoinsMarketChartRange) -> CoinsMarketChar
 }
 
 
-pub fn coinsContract(args: ArgsCoinsContract) -> CoinsContract {
+pub fn coins_contract(args: ArgsCoinsContract) -> Contract {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "contract_address".to_string(), value: "args.name".to_string() }
@@ -513,7 +511,7 @@ pub fn coinsContract(args: ArgsCoinsContract) -> CoinsContract {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsContract>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Contract>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -522,7 +520,7 @@ pub fn coinsContract(args: ArgsCoinsContract) -> CoinsContract {
 }
 
 
-pub fn coinsContractMarketChart(args: ArgsCoinsContractMarketChart) -> CoinsContractMarketChart {
+pub fn coins_contract_market_chart(args: ArgsCoinsContractMarketChart) -> MarketChart {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "contract_address".to_string(), value: "args.name".to_string() },
@@ -556,7 +554,7 @@ pub fn coinsContractMarketChart(args: ArgsCoinsContractMarketChart) -> CoinsCont
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsContractMarketChart>(&v).unwrap(),
+            Some(v) => JSON::from_str::<MarketChart>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -565,7 +563,7 @@ pub fn coinsContractMarketChart(args: ArgsCoinsContractMarketChart) -> CoinsCont
 }
 
 
-pub fn coinsContractMarketChartRange(args: ArgsCoinsContractMarketChartRange) -> CoinsContractMarketChartRange {
+pub fn coins_contract_market_chart_range(args: ArgsCoinsContractMarketChartRange) -> Contract {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "contract_address".to_string(), value: "args.name".to_string() },
@@ -600,7 +598,7 @@ pub fn coinsContractMarketChartRange(args: ArgsCoinsContractMarketChartRange) ->
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsContractMarketChartRange>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Contract>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -609,7 +607,7 @@ pub fn coinsContractMarketChartRange(args: ArgsCoinsContractMarketChartRange) ->
 }
 
 
-pub fn coinsOhlc(args: ArgsCoinsOhlc) -> CoinsOhlc {
+pub fn coins_ohlc(args: ArgsCoinsOhlc) -> Vec<Vec<BigNumber>> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "vs_currency".to_string(), value: "args.name".to_string() },
@@ -642,7 +640,7 @@ pub fn coinsOhlc(args: ArgsCoinsOhlc) -> CoinsOhlc {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsOhlc>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Vec<BigNumber>>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -651,7 +649,7 @@ pub fn coinsOhlc(args: ArgsCoinsOhlc) -> CoinsOhlc {
 }
 
 
-pub fn assetPlatforms(args: ArgsAssetPlatforms) -> AssetPlatforms {
+pub fn asset_platforms(args: ArgsAssetPlatforms) -> Vec<AssetPlatform> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -682,7 +680,7 @@ pub fn assetPlatforms(args: ArgsAssetPlatforms) -> AssetPlatforms {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<AssetPlatforms>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<AssetPlatform>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -691,7 +689,7 @@ pub fn assetPlatforms(args: ArgsAssetPlatforms) -> AssetPlatforms {
 }
 
 
-pub fn coinsCategoriesList(args: ArgsCoinsCategoriesList) -> CoinsCategoriesList {
+pub fn coins_categories_list(args: ArgsCoinsCategoriesList) -> Vec<CategoryId> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -722,7 +720,7 @@ pub fn coinsCategoriesList(args: ArgsCoinsCategoriesList) -> CoinsCategoriesList
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsCategoriesList>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<CategoryId>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -731,7 +729,7 @@ pub fn coinsCategoriesList(args: ArgsCoinsCategoriesList) -> CoinsCategoriesList
 }
 
 
-pub fn coinsCategories(args: ArgsCoinsCategories) -> CoinsCategories {
+pub fn coins_categories(args: ArgsCoinsCategories) -> Vec<Category> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "order".to_string(), value: "args.name".to_string() }
     ]);
@@ -762,7 +760,7 @@ pub fn coinsCategories(args: ArgsCoinsCategories) -> CoinsCategories {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<CoinsCategories>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Category>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -771,7 +769,7 @@ pub fn coinsCategories(args: ArgsCoinsCategories) -> CoinsCategories {
 }
 
 
-pub fn exchanges(args: ArgsExchanges) -> Exchanges {
+pub fn exchanges(args: ArgsExchanges) -> Vec<Exchange> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "per_page".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "page".to_string(), value: "args.name".to_string() }
@@ -803,7 +801,7 @@ pub fn exchanges(args: ArgsExchanges) -> Exchanges {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Exchanges>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Exchange>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -812,7 +810,7 @@ pub fn exchanges(args: ArgsExchanges) -> Exchanges {
 }
 
 
-pub fn exchangesList(args: ArgsExchangesList) -> ExchangesList {
+pub fn exchanges_list(args: ArgsExchangesList) -> Vec<ExchangeId> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -843,7 +841,7 @@ pub fn exchangesList(args: ArgsExchangesList) -> ExchangesList {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<ExchangesList>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<ExchangeId>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -852,7 +850,7 @@ pub fn exchangesList(args: ArgsExchangesList) -> ExchangesList {
 }
 
 
-pub fn exchanges(args: ArgsExchanges) -> Exchanges {
+pub fn exchange(args: ArgsExchange) -> Exchange {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() }
     ]);
@@ -883,7 +881,7 @@ pub fn exchanges(args: ArgsExchanges) -> Exchanges {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Exchanges>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Exchange>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -892,7 +890,7 @@ pub fn exchanges(args: ArgsExchanges) -> Exchanges {
 }
 
 
-pub fn exchangesTickers(args: ArgsExchangesTickers) -> ExchangesTickers {
+pub fn exchanges_tickers(args: ArgsExchangesTickers) -> Tickers {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "coin_ids".to_string(), value: "args.name".to_string() },
@@ -928,7 +926,7 @@ pub fn exchangesTickers(args: ArgsExchangesTickers) -> ExchangesTickers {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<ExchangesTickers>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Tickers>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -937,7 +935,7 @@ pub fn exchangesTickers(args: ArgsExchangesTickers) -> ExchangesTickers {
 }
 
 
-pub fn indexes(args: ArgsIndexes) -> Indexes {
+pub fn indexes(args: ArgsIndexes) -> Vec<Index> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "per_page".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "page".to_string(), value: "args.name".to_string() }
@@ -969,7 +967,7 @@ pub fn indexes(args: ArgsIndexes) -> Indexes {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Indexes>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Index>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -978,7 +976,7 @@ pub fn indexes(args: ArgsIndexes) -> Indexes {
 }
 
 
-pub fn indexes(args: ArgsIndexes) -> Indexes {
+pub fn market_indexes(args: ArgsMarketIndexes) -> MarketIndex {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "market_id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() }
@@ -1010,7 +1008,7 @@ pub fn indexes(args: ArgsIndexes) -> Indexes {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Indexes>(&v).unwrap(),
+            Some(v) => JSON::from_str::<MarketIndex>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1019,7 +1017,7 @@ pub fn indexes(args: ArgsIndexes) -> Indexes {
 }
 
 
-pub fn indexesList(args: ArgsIndexesList) -> IndexesList {
+pub fn indexes_list(args: ArgsIndexesList) -> Vec<IndexId> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -1050,7 +1048,7 @@ pub fn indexesList(args: ArgsIndexesList) -> IndexesList {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<IndexesList>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<IndexId>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1059,7 +1057,7 @@ pub fn indexesList(args: ArgsIndexesList) -> IndexesList {
 }
 
 
-pub fn derivatives(args: ArgsDerivatives) -> Derivatives {
+pub fn derivatives(args: ArgsDerivatives) -> Vec<Derivative> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "include_tickers".to_string(), value: "args.name".to_string() }
     ]);
@@ -1090,7 +1088,7 @@ pub fn derivatives(args: ArgsDerivatives) -> Derivatives {
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<Derivatives>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Derivative>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1099,7 +1097,7 @@ pub fn derivatives(args: ArgsDerivatives) -> Derivatives {
 }
 
 
-pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchanges {
+pub fn derivatives_exchanges(args: ArgsDerivativesExchanges) -> Vec<Derivative> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "order".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "per_page".to_string(), value: "args.name".to_string() },
@@ -1132,7 +1130,7 @@ pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchan
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<DerivativesExchanges>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<Derivative>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1141,7 +1139,7 @@ pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchan
 }
 
 
-pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchanges {
+pub fn derivatives_exchange(args: ArgsDerivativesExchange) -> Derivative {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
         HttpUrlParam { key: "include_tickers".to_string(), value: "args.name".to_string() }
@@ -1173,7 +1171,7 @@ pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchan
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<DerivativesExchanges>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Derivative>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1182,7 +1180,7 @@ pub fn derivativesExchanges(args: ArgsDerivativesExchanges) -> DerivativesExchan
 }
 
 
-pub fn derivativesExchangesList(args: ArgsDerivativesExchangesList) -> DerivativesExchangesList {
+pub fn derivatives_exchanges_list(args: ArgsDerivativesExchangesList) -> Vec<DerivativeExchangeId> {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -1213,7 +1211,7 @@ pub fn derivativesExchangesList(args: ArgsDerivativesExchangesList) -> Derivativ
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<DerivativesExchangesList>(&v).unwrap(),
+            Some(v) => JSON::from_str::<Vec<DerivativeExchangeId>>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1222,48 +1220,48 @@ pub fn derivativesExchangesList(args: ArgsDerivativesExchangesList) -> Derivativ
 }
 
 
-pub fn exchangesVolumeChart(args: ArgsExchangesVolumeChart) -> ExchangesVolumeChart {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
-        HttpUrlParam { key: "days".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/exchanges/args.id/volume_chart".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
+// pub fn exchangesVolumeChart(args: ArgsExchangesVolumeChart) -> ExchangesVolumeChart {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "id".to_string(), value: "args.name".to_string() },
+//         HttpUrlParam { key: "days".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/exchanges/args.id/volume_chart".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
 
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
 
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
 
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<ExchangesVolumeChart>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<ExchangesVolumeChart>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
 
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
 
 
-pub fn exchangeRates(args: ArgsExchangeRates) -> ExchangeRates {
+pub fn exchange_rates(args: ArgsExchangeRates) -> ExchangeRates {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -1303,47 +1301,47 @@ pub fn exchangeRates(args: ArgsExchangeRates) -> ExchangeRates {
 }
 
 
-pub fn search(args: ArgsSearch) -> Search {
-    let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-        HttpUrlParam { key: "query".to_string(), value: "args.name".to_string() }
-    ]);
-    let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-        url: "https://api.coingecko.com/api/v3/search".to_string(),
-        request: Some(HttpRequest {
-            headers: None,
-            url_params: url_params,
-            response_type: HttpResponseType::TEXT,
-            body: None,
-        }),
-    }) {
-        Ok(Some(v)) => v,
-        Ok(None) => panic!("Did not receive HTTP response"),
-        Err(e) => panic!("{}", e),
-    };
+// pub fn search(args: ArgsSearch) -> Search {
+//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
+//         HttpUrlParam { key: "query".to_string(), value: "args.name".to_string() }
+//     ]);
+//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//         url: "https://api.coingecko.com/api/v3/search".to_string(),
+//         request: Some(HttpRequest {
+//             headers: None,
+//             url_params: url_params,
+//             response_type: HttpResponseType::TEXT,
+//             body: None,
+//         }),
+//     }) {
+//         Ok(Some(v)) => v,
+//         Ok(None) => panic!("Did not receive HTTP response"),
+//         Err(e) => panic!("{}", e),
+//     };
 
-    // handle json rpc error
-    if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-        let response_body: String = match http_response.body {
-            Some(v) => v,
-            None => "An unknown error occurred!".to_string()
-        };
+//     // handle json rpc error
+//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
+//         let response_body: String = match http_response.body {
+//             Some(v) => v,
+//             None => "An unknown error occurred!".to_string()
+//         };
 
-        panic!("Error {}: {}", http_response.status, response_body)
-    }
+//         panic!("Error {}: {}", http_response.status, response_body)
+//     }
 
-    // handle json rpc success
-    if http_response.status >= 200 && http_response.status <= 299 {
-        return match http_response.body {
-            Some(v) => JSON::from_str::<Search>(&v).unwrap(),
-            None => panic!("Missing response with successful HTTP status {}", http_response.status)
-        };
-    }
+//     // handle json rpc success
+//     if http_response.status >= 200 && http_response.status <= 299 {
+//         return match http_response.body {
+//             Some(v) => JSON::from_str::<Search>(&v).unwrap(),
+//             None => panic!("Missing response with successful HTTP status {}", http_response.status)
+//         };
+//     }
 
-    panic!("Unexpected HTTP response with status: {}", http_response.status);
-}
+//     panic!("Unexpected HTTP response with status: {}", http_response.status);
+// }
 
 
-pub fn searchTrending(args: ArgsSearchTrending) -> SearchTrending {
+pub fn search_trending(args: ArgsSearchTrending) -> SearchTrending {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -1423,7 +1421,7 @@ pub fn global(args: ArgsGlobal) -> Global {
 }
 
 
-pub fn globalDecentralizedFinanceDefi(args: ArgsGlobalDecentralizedFinanceDefi) -> GlobalDecentralizedFinanceDefi {
+pub fn global_decentralized_finance_defi(args: ArgsGlobalDecentralizedFinanceDefi) -> GlobalDefi {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
 
     ]);
@@ -1454,7 +1452,7 @@ pub fn globalDecentralizedFinanceDefi(args: ArgsGlobalDecentralizedFinanceDefi) 
     // handle json rpc success
     if http_response.status >= 200 && http_response.status <= 299 {
         return match http_response.body {
-            Some(v) => JSON::from_str::<GlobalDecentralizedFinanceDefi>(&v).unwrap(),
+            Some(v) => JSON::from_str::<GlobalDefi>(&v).unwrap(),
             None => panic!("Missing response with successful HTTP status {}", http_response.status)
         };
     }
@@ -1463,7 +1461,7 @@ pub fn globalDecentralizedFinanceDefi(args: ArgsGlobalDecentralizedFinanceDefi) 
 }
 
 
-pub fn companiesPublicTreasury(args: ArgsCompaniesPublicTreasury) -> CompaniesPublicTreasury {
+pub fn companies_public_treasury(args: ArgsCompaniesPublicTreasury) -> CompaniesPublicTreasury {
     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
         HttpUrlParam { key: "coin_id".to_string(), value: "args.name".to_string() }
     ]);

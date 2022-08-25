@@ -1,0 +1,6 @@
+type AssetPlatform {
+    id: String!
+    chain_identifier: Int
+    name: String!
+    shortname: String!
+}

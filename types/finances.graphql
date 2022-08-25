@@ -1,0 +1,26 @@
+# ---------------------------------------------
+#  /finance_platforms
+# ---------------------------------------------
+type FinancePlatform {
+    name: String!
+    facts: String!
+    category: String!
+    centralized: Boolean!
+    website_url: String!
+}
+
+# ---------------------------------------------
+#  /finance_products
+# ---------------------------------------------
+type FinanceProduct {
+    platform: String!
+    identifier: String!
+    supply_rate_percentage: String
+    borrow_rate_percentage: String
+    number_duration: BigNumber
+    length_duration: BigNumber
+    start_at: Int!
+    end_at: Int!
+    value_at: Int!
+    redeem_at: Int!
+}

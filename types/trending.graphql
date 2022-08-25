@@ -1,0 +1,25 @@
+# ---------------------------------------------
+#  /search/trending
+# ---------------------------------------------
+type SearchTrending {
+    coins: [TrendingCoin],
+    exchanges: [JSON!],
+}
+
+type TrendingCoin {
+    item: TrendingCoinMarketData
+}
+
+type TrendingCoinMarketData {
+    id: String!
+    coin_id: BigNumber!
+    name: String!
+    symbol: String!
+    market_cap_rank: BigNumber!
+    thumb: String!
+    small: String!
+    large: String!
+    slug: String!
+    price_btc: BigNumber!
+    score: BigNumber!
+}

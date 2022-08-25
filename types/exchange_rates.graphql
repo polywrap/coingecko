@@ -1,0 +1,13 @@
+# ---------------------------------------------
+#  /exchange_rates
+# ---------------------------------------------
+type ExchangeRates {
+    rates: Map! @annotate(type: "Map<String!, ExchangeRateData!>!")
+}
+
+type ExchangeRateData {
+    name: String!
+    unit: String!
+    value: BigNumber!
+    type: String!
+}

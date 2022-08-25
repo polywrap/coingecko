@@ -1,0 +1,303 @@
+#import * from "./common.graphql"
+
+
+#---------------------------------------------
+#  /coins/list
+# ---------------------------------------------
+type CoinListItem {
+  id: String!
+  symbol: String!
+  name: String!
+  platforms: Map! @annotate(type: "Map<String!, String>!")
+}
+
+#---------------------------------------------
+#  /coins/markets
+# ---------------------------------------------
+type SparklineIn7D {
+    price: BigNumber!
+}
+
+type CoinMarketItem {
+    id: String!
+    symbol: String!
+    name: String!
+    image: String!
+    current_price: BigNumber
+    market_cap: BigNumber
+    fully_diluted_valuation: JSON!
+    total_volume: BigNumber    
+    #[serde(rename = "high_24h")]
+    high24_h: BigNumber,
+    #[serde(rename = "low_24h")]
+    low24_h: BigNumber,
+    #[serde(rename = "price_change_24h")]
+    price_change24_h: BigNumber,
+    #[serde(rename = "price_change_percentage_24h")]
+    price_change_percentage24_h: BigNumber,
+    #[serde(rename = "market_cap_change_24h")]
+    market_cap_change24_h: BigNumber,
+    #[serde(rename = "market_cap_change_percentage_24h")]
+    market_cap_change_percentage24_h: BigNumber,
+    circulating_supply: BigNumber,
+    total_supply: BigNumber,
+    max_supply: BigNumber,
+    ath: BigNumber,
+    ath_change_percentage: BigNumber,
+    ath_date: String,
+    atl: BigNumber,
+    atl_change_percentage: BigNumber,
+    atl_date: String,
+    roi: JSON!,
+    last_updated: String,
+    #[serde(rename = "sparkline_in_7d")]
+    sparkline_in7_d: SparklineIn7D,
+    #[serde(rename = "price_change_percentage_14d_in_currency")]
+    price_change_percentage14_d_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_1h_in_currency")]
+    price_change_percentage1_h_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_1y_in_currency")]
+    price_change_percentage1_y_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_200d_in_currency")]
+    price_change_percentage200_d_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_24h_in_currency")]
+    price_change_percentage24_h_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_30d_in_currency")]
+    price_change_percentage30_d_in_currency: BigNumber,
+    #[serde(rename = "price_change_percentage_7d_in_currency")]
+    price_change_percentage7_d_in_currency: BigNumber,
+}
+
+# ---------------------------------------------
+#  /coins/{id}
+# ---------------------------------------------
+type CoinsItem implements CoinListItem {
+    asset_platform_id: JSON!,
+    block_time_in_minutes: BigNumber,
+    hashing_algorithm: JSON,
+    categories: [String]!,
+    public_notice: JSON!,
+    additional_notices: [JSON!]!,
+    localization: Localization,
+    description: Description,
+    links: Links,
+    image: Image,
+    country_origin: String,
+    genesis_date: JSON!,
+    contract_address: String,
+    sentiment_votes_up_percentage: JSON!,
+    sentiment_votes_down_percentage: JSON!,
+    market_cap_rank: JSON!,
+    coingecko_rank: JSON!,
+    coingecko_score: JSON!,
+    developer_score: JSON!,
+    community_score: JSON!,
+    liquidity_score: JSON!,
+    ic_interest_score: JSON!,
+    market_data: MarketData,
+    community_data: CommunityData,
+    developer_data: DeveloperData,
+    public_interest_stats: PublicInterestStats,
+    status_updates: [JSON],
+    last_updated: String,
+    tickers: [Ticker!],
+}
+
+type Description {
+    en: String,
+    de: String,
+    es: String,
+    fr: String,
+    it: String,
+    pl: String,
+    ro: String,
+    hu: String,
+    nl: String,
+    pt: String,
+    sv: String,
+    vi: String,
+    tr: String,
+    ru: String,
+    ja: String,
+    zh: String,
+    #[serde(rename = "zh-tw")]
+    zh_tw: String,
+    ko: String,
+    ar: String,
+    th: String,
+    id: String,
+}
+
+type MarketData {
+    current_price: CurrentPrice,
+    total_value_locked: JSON!,
+    mcap_to_tvl_ratio: JSON!,
+    fdv_to_tvl_ratio: JSON!,
+    roi: JSON!,
+    ath: Ath,
+    ath_change_percentage: AthChangePercentage,
+    ath_date: AthDate,
+    atl: Atl,
+    atl_change_percentage: AtlChangePercentage,
+    atl_date: AtlDate,
+    market_cap: MarketCap,
+    market_cap_rank: JSON!,
+    fully_diluted_valuation: FullyDilutedValuation,
+    total_volume: TotalVolume,
+    #[serde(rename = "high_24h")]
+    high24_h: High24H,
+    #[serde(rename = "low_24h")]
+    low24_h: Low24H,
+    #[serde(rename = "price_change_24h")]
+    price_change24_h: BigNumber,
+    #[serde(rename = "price_change_percentage_24h")]
+    price_change_percentage24_h: BigNumber,
+    #[serde(rename = "price_change_percentage_7d")]
+    price_change_percentage7_d: BigNumber,
+    #[serde(rename = "price_change_percentage_14d")]
+    price_change_percentage14_d: BigNumber,
+    #[serde(rename = "price_change_percentage_30d")]
+    price_change_percentage30_d: BigNumber,
+    #[serde(rename = "price_change_percentage_60d")]
+    price_change_percentage60_d: BigNumber,
+    #[serde(rename = "price_change_percentage_200d")]
+    price_change_percentage200_d: BigNumber,
+    #[serde(rename = "price_change_percentage_1y")]
+    price_change_percentage1_y: BigNumber,
+    #[serde(rename = "market_cap_change_24h")]
+    market_cap_change24_h: BigNumber,
+    #[serde(rename = "market_cap_change_percentage_24h")]
+    market_cap_change_percentage24_h: BigNumber,
+    #[serde(rename = "price_change_24h_in_currency")]
+    price_change24_h_in_currency: PriceChange24HInCurrency,
+    #[serde(rename = "price_change_percentage_1h_in_currency")]
+    price_change_percentage1_h_in_currency: PriceChangePercentage1HInCurrency,
+    #[serde(rename = "price_change_percentage_24h_in_currency")]
+    price_change_percentage24_h_in_currency: PriceChangePercentage24HInCurrency,
+    #[serde(rename = "price_change_percentage_7d_in_currency")]
+    price_change_percentage7_d_in_currency: PriceChangePercentage7DInCurrency,
+    #[serde(rename = "price_change_percentage_14d_in_currency")]
+    price_change_percentage14_d_in_currency: PriceChangePercentage14DInCurrency,
+    #[serde(rename = "price_change_percentage_30d_in_currency")]
+    price_change_percentage30_d_in_currency: PriceChangePercentage30DInCurrency,
+    #[serde(rename = "price_change_percentage_60d_in_currency")]
+    price_change_percentage60_d_in_currency: PriceChangePercentage60DInCurrency,
+    #[serde(rename = "price_change_percentage_200d_in_currency")]
+    price_change_percentage200_d_in_currency: PriceChangePercentage200DInCurrency,
+    #[serde(rename = "price_change_percentage_1y_in_currency")]
+    price_change_percentage1_y_in_currency: PriceChangePercentage1YInCurrency,
+    #[serde(rename = "market_cap_change_24h_in_currency")]
+    market_cap_change24_h_in_currency: MarketCapChange24HInCurrency,
+    #[serde(rename = "market_cap_change_percentage_24h_in_currency")]
+    market_cap_change_percentage24_h_in_currency: MarketCapChangePercentage24HInCurrency,
+    total_supply: JSON,
+    max_supply: JSON,
+    circulating_supply: JSON,
+    #[serde(rename = "sparkline_7d")]
+    sparkline7_d: Sparkline7D,
+    last_updated: String,
+}
+
+type Ath implements TokenNumber {}
+type AthChangePercentage implements TokenNumber {}
+type AthDate implements TokenString {}
+type Atl implements TokenNumber {}
+type AtlChangePercentage implements TokenNumber {}
+type AtlDate implements TokenString {}
+type FullyDilutedValuation implements TokenNumber {}
+type High24H implements TokenNumber {}
+type Low24H implements TokenNumber {}
+type PriceChange24HInCurrency implements TokenNumber {}
+type PriceChangePercentage1HInCurrency implements TokenNumber {}
+type PriceChangePercentage24HInCurrency implements TokenNumber {}
+type PriceChangePercentage7DInCurrency implements TokenNumber {}
+type PriceChangePercentage14DInCurrency implements TokenNumber {}
+type PriceChangePercentage30DInCurrency implements TokenNumber {}
+type PriceChangePercentage60DInCurrency implements TokenNumber {}
+type PriceChangePercentage200DInCurrency implements TokenNumber {}
+type PriceChangePercentage1YInCurrency implements TokenNumber {}
+type MarketCapChange24HInCurrency implements TokenNumber {}
+type MarketCapChangePercentage24HInCurrency implements TokenNumber {}
+
+type Sparkline7D {
+  price: [BigNumber!]!
+}
+
+type History {
+  id: String!
+  symbol: String!
+  name: String!
+  localication: Localization
+  image: Image!
+  market_data: HistoryMarketData!
+  community_data: CommunityData
+  developer_data: DeveloperData
+  public_interest_stats: PublicInterestStats
+}
+
+type HistoryMarketData {
+  current_price: CurrentPrice
+  market_cap: MarketCap
+  total_volume: TotalVolume
+}
+
+type MarketChart {
+    prices:[[BigNumber!]!]!
+    market_caps: [[BigNumber!]!]!
+    total_volumes: [[BigNumber!]!]!
+}
+
+type Contract implements CoinListItem {
+    asset_platform_id: String!
+    block_time_in_minutes: Int!
+    hashing_algorithm: JSON!
+    categories: [String!]!
+    ic_notice: JSON!
+    additional_notices: [JSON]
+    localization: Localization!
+    description: Description!
+    links: Links!
+    image: Image!
+    country_origin: String!
+    genesis_date: JSON!
+    contract_address: String
+    sentiment_votes_up_percentage: BigNumber!
+    sentiment_votes_down_percentage: BigNumber!
+    market_cap_rank: Int!
+    coingecko_rank: Int!
+    coingecko_score: BigNumber!
+    developer_score: Int!
+    community_score: BigNumber!
+    liquidity_score: BigNumber!
+    public_interest_score: BigNumber!
+    market_data: MarketData!
+    community_data: CommunityData!
+    developer_data: DeveloperData!
+    public_interest_stats: PublicInterestStats!
+    status_updates: [JSON!]
+    last_updated: String!
+    tickers: [Ticker]
+}
+
+
+# # ---------------------------------------------
+# #  /coins/categories/list
+# # ---------------------------------------------
+type CategoryId {
+    category_id: String!
+    name: String!
+}
+
+# # ---------------------------------------------
+# #  /coins/categories
+# # ---------------------------------------------
+type Category {
+    id: String!
+    name: String!
+    market_cap: BigNumber!
+    #[serde(rename = "market_cap_change_24h")]
+    market_cap_change24_h: BigNumber!
+    #[serde(rename = "volume_24h")]
+    volume24_h: BigNumber!
+    updated_at: String!
+}

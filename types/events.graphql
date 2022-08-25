@@ -1,0 +1,45 @@
+# ---------------------------------------------
+#  /events
+# ---------------------------------------------
+type Events {
+    data: [Event]!,
+    count: BigNumber!,
+    page: BigNumber!,
+}
+type Event {
+    #[serde(rename = "type")]
+    type_field: String!,
+    title: String!,
+    description: String!,
+    organizer: String!,
+    start_date: String!,
+    end_date: String!,
+    website: String!,
+    email: String!,
+    venue: String!,
+    address: String!,
+    city: String!,
+    country: String!,
+    screenshot: String!,
+}
+
+# ---------------------------------------------
+#  /events/countries
+# ---------------------------------------------
+type EventCountries {
+    data: [Country!]!,
+    count: BigNumber!,
+}
+
+type Country {
+    country: String,
+    code: String!,
+}
+
+# ---------------------------------------------
+#  /events/types
+# ---------------------------------------------
+type EventTypes {
+    data: [String!]!,
+    count: BigNumber!,
+}

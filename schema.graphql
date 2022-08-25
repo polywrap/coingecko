@@ -2,10 +2,9 @@
 #import { SimplePrice } from "./types/simple.graphql"
 #import { CompaniesPublicTreasury } from "./types/companies.graphql"
 #import { GlobalDefi, Global } from "./types/global.graphql"
-#import { DerivativeExchangeId, Derivative } from "./types/derivatives.graphql"
+#import { DerivativeExchange, DerivativeExchangeId, Derivative } from "./types/derivatives.graphql"
 #import { SearchTrending } from "./types/trending.graphql"
 #import { IndexId, MarketIndex, Index } from "./types/indexes.graphql"
-#import { ExchangeRates } from "./types/exchange_rates.graphql"
 #import { ExchangeId, Exchange } from "./types/exchanges.graphql"
 #import { Category, CategoryId, Contract, MarketChart, History, CoinMarketItem, CoinsItem } from "./types/coins.graphql"
 #import { AssetPlatform } from "./types/asset_platform.graphql"
@@ -250,7 +249,7 @@ type Module {
     order: String
     per_page: Int
     page: Int
-  ): [Derivative!]!
+  ): [DerivativeExchange!]!
   
   """
   show derivative exchange data
@@ -258,7 +257,7 @@ type Module {
   derivativesExchange(
     id: String!
     include_tickers: String
-  ): Derivative!
+  ): DerivativeExchange!
   
   # """
   # List all derivative exchanges name and identifier
@@ -272,12 +271,12 @@ type Module {
   #   id: String!
   #   days: Int!
   # ): ExchangesVolumeChart
-  
-  """
-  Get BTC-to-Currency exchange rates
-  """
-  exchangeRates: ExchangeRates!
-  
+
+  # """
+  # Get BTC-to-Currency exchange rates
+  # """
+  # exchangeRates: ExchangeRates!
+
   # """
   # Search for coins, categories and markets on CoinGecko
   # """

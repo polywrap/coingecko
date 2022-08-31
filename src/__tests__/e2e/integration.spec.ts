@@ -22,6 +22,13 @@ describe("Coingecko", () => {
     expect(ping.data?.gecko_says).toStrictEqual("(V3) To the Moon!");
   });
 
+  test("simplePrice", async () => {
+    const simplePrice = await Coingecko_Module.simplePrice({ids: "bitcoin", vs_currencies: "usd"}, client, wrapperUri);
+    console.log(simplePrice.data)
+    // expect(simplePrice.error).toBeFalsy();
+    // expect(simplePrice.data).toBeTruthy();
+  })
+
   test("simpleSupportedVsCurrencies", async () => {
     const simpleSupportedVsCurrencies = await Coingecko_Module.simpleSupportedVsCurrencies({}, client, wrapperUri);
     expect(simpleSupportedVsCurrencies.error).toBeFalsy();
@@ -45,5 +52,11 @@ describe("Coingecko", () => {
     expect(coinMarkets.data?.length).toBeGreaterThan(0);
 
     console.log(coinMarkets);
-  })
+  });
+
+  // test("coin", async() => {
+  //   const coin = await Coingecko_Module.coin({id: "bitcoin"}, client, wrapperUri);
+
+  //   console.log(coin);
+  // });
 });

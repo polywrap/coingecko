@@ -1,10 +1,11 @@
+use polywrap_wasm_rs::{Map};
+
 pub fn bool_to_string(value: Option<bool>) -> Option<String> {
-    Some(match value {
-        Some(true) => "true",
-        Some(false) => "false",
-        None => "false",
+    match value {
+        Some(true) => Some("true".to_string()),
+        Some(false) => None,
+        None => None,
     }
-    .to_string())
 }
 
 pub fn int_to_string(value: Option<i32>) -> Option<String> {
@@ -14,3 +15,14 @@ pub fn int_to_string(value: Option<i32>) -> Option<String> {
   }
 }
 
+pub trait AddOptVal<T> {
+    fn add(&mut self, key: &str, value: Option<T>);
+}
+
+impl<T> AddOptVal<T> for Map<String, T> {
+    fn add(&mut self, key: &str, value: Option<T>) {
+        if let Some(val) = value {
+            self.insert(key.to_string(), val);
+        }
+    }
+}

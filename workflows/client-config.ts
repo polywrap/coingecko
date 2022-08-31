@@ -51,7 +51,7 @@ export const requests = [
     name: 'coinsHistory',
     url: '/api/v3/coins/bitcoin/history?date=27-08-2018',
     reply: '{ "id": "bitcoin", "symbol": "btc", "name": "Bitcoin", "localization": { "en": "Bitcoin", "es": "Bitcoin", "de": "Bitcoin", "nl": "Bitcoin", "pt": "Bitcoin", "fr": "Bitcoin", "it": "Bitcoin", "hu": "Bitcoin", "ro": "Bitcoin", "sv": "Bitcoin", "pl": "Bitcoin", "id": "Bitcoin", "zh": "比特币", "zh-tw": "比特幣", "ja": "ビットコイン", "ko": "비트코인", "ru": "биткоина", "ar": "بيتكوين", "th": "บิตคอยน์", "vi": "Bitcoin", "tr": "Bitcoin" }, "image": {}, "market_data": {}}'
-  }
+  },
   {
     name: 'coinsMarketChart',
     url: '/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1',
@@ -99,7 +99,7 @@ export const requests = [
   },
   {
     name: 'exchanges',
-    url: /\/api\/v3\/exchanges$/
+    url: /\/api\/v3\/exchanges$/,
     reply: '[ { "id": "bitforex", "name": "Bitforex", "description": "", "url": "https://www.bitforex.com/", "image": "https://assets.coingecko.com/markets/images/214/small/bitforex.jpg?1533199114", "has_trading_incentive": true, "trade_volume_24h_btc": 680266.637119918 }, { "id": "binance", "name": "Binance", "description": "Binance is a China-based cryptocurrency exchange that lists most of the Chinese coins. It is a popular exchange for its huge number of Initial Coin Offering (ICO) listings and low fees.", "url": "https://www.binance.com/", "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250", "has_trading_incentive": "false", "trade_volume_24h_btc": 189744.350072168 } ]'
   },
   {

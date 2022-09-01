@@ -145,59 +145,60 @@ type Module {
     days: String!
   ): [[BigNumber!]!]!
 
-#   ########################################################################
-#   #                               CONTRACT                               #
-#   ########################################################################
+  ########################################################################
+  #                               CONTRACT                               #
+  ########################################################################
 
-#   coinContract(
-#     """
-#     Get coin info from contract address
-#     """
-#     id: String!
-#     contract_address: String!
-#   ): Contract!
+  coinContract(
+    """
+    Get coin info from contract address
+    """
+    id: String!
+    contract_address: String!
+  ): Contract!
 
-#   coinContractMarketChart(
-#     """
-#     Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
-#     """
-#     id: String!
-#     contract_address: String!
-#     vs_currency: String!
-#     days: String!
-#   ): MarketChart!
+  coinContractMarketChart(
+    """
+    Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+    """
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    days: String!
+  ): MarketChart!
 
-#   coinContractMarketChartRange(
-#     """
-#     Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
-#     """
-#     id: String!
-#     contract_address: String!
-#     vs_currency: String!
-#     from: String!
-#     to: String!
-#   ): Contract!
+  coinContractMarketChartRange(
+    """
+    Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+    """
+    id: String!
+    contract_address: String!
+    vs_currency: String!
+    from: String!
+    to: String!
+  ): MarketChart!
   
-#   ########################################################################
-#   #                           ASSET PLATFORMS                            #
-#   ########################################################################
+  ########################################################################
+  #                           ASSET PLATFORMS                            #
+  ########################################################################
 
-#   assetPlatforms: [AssetPlatform!]!
-#   """ List all asset platforms (Blockchain networks) """
+  """ List all asset platforms (Blockchain networks) """
+  assetPlatforms: [AssetPlatform!]!
 
-#   ########################################################################
-#   #                              CATEGORIES                              #
-#   ########################################################################
 
-#   coinsCategoriesList: [CategoryId!]!
-#   """ List all categories """
+  ########################################################################
+  #                              CATEGORIES                              #
+  ########################################################################
 
-#   coinsCategories(
-#     """
-#     List all categories with market data
-#     """
-#     order: String
-#   ): [Category!]!
+  # coinsCategoriesList: [CategoryId!]!
+  # """ List all categories """
+
+  # coinsCategories(
+  #   """
+  #   List all categories with market data
+  #   """
+  #   order: String
+  # ): [Category!]!
 
 #   ########################################################################
 #   #                              EXCHANGES                               #

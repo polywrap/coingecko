@@ -508,313 +508,221 @@ pub fn coin_ohlc(args: ArgsCoinOhlc) -> Vec<Vec<BigNumber>> {
 *                               CONTRACT                               *
 ***********************************************************************/
 
-// pub fn coins_contract(args: ArgsCoinsContract) -> Contract {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-//         HttpUrlParam {
-//             key: "id".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "contract_address".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/coins/args.id/contract/args.contract_address"
-//             .to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+pub fn coin_contract(args: ArgsCoinContract) -> Contract {
+    let url = unsafe {
+        format!(
+            "https://api.coingecko.com/api/v3/coins/{}/contract/{}",
+            args.id.as_str(), args.contract_address.as_str()
+        )
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
+    let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
+        url: url,
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: None,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    })
+    .expect("Received an error as HTTP Response")
+    .expect("Received an empty HTTP Response");
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+    let response_body: String = http_response
+        .body
+        .expect("Received an empty body as HTTP Response");
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Contract>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return JSON::from_str::<Contract>(&response_body).unwrap();
+    }
+    unsafe {
+        panic!(
+            "Unexpected HTTP response: {} with status: {}",
+            response_body, http_response.status
+        );
+    }
+}
 
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
-// }
+pub fn coin_contract_market_chart(args: ArgsCoinContractMarketChart) -> MarketChart {
+    let mut url_params: Map<String, String> = Map::new();
+    url_params.add("vs_currency", args.vs_currency);
+    url_params.insert("days".to_string(), args.days);
 
-// pub fn coins_contract_market_chart(args: ArgsCoinsContractMarketChart) -> MarketChart {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-//         HttpUrlParam {
-//             key: "id".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "contract_address".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "vs_currency".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "days".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/coins/args.id/contract/args.contract_address/market_chart/".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    let url = unsafe {
+        format!(
+            "https://api.coingecko.com/api/v3/coins/{}/contract/{}/market_chart",
+            args.id.as_str(), args.contract_address.as_str()
+        )
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
+    let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
+        url: url,
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: Some(url_params),
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    })
+    .expect("Received an error as HTTP Response")
+    .expect("Received an empty HTTP Response");
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+    let response_body: String = http_response
+        .body
+        .expect("Received an empty body as HTTP Response");
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<MarketChart>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return JSON::from_str::<MarketChart>(&response_body).unwrap();
+    }
+    unsafe {
+        panic!(
+            "Unexpected HTTP response: {} with status: {}",
+            response_body, http_response.status
+        );
+    }
+}
 
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
-// }
+pub fn coin_contract_market_chart_range(args: ArgsCoinContractMarketChartRange) -> MarketChart {
+    let mut url_params: Map<String, String> = Map::new();
+    url_params.add("vs_currency", args.vs_currency);
+    url_params.add("from", args.from);
+    url_params.add("to", args.to);
 
-// pub fn coins_contract_market_chart_range(args: ArgsCoinsContractMarketChartRange) -> Contract {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![
-//         HttpUrlParam {
-//             key: "id".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "contract_address".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "vs_currency".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "from".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//         HttpUrlParam {
-//             key: "to".to_string(),
-//             value: "args.name".to_string(),
-//         },
-//     ]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/coins/args.id/contract/args.contract_address/market_chart/range".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+    let url = unsafe {
+        format!(
+            "https://api.coingecko.com/api/v3/coins/{}/contract/{}/market_chart/range",
+            args.id.as_str(), args.contract_address.as_str()
+        )
+    };
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
+    let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
+        url: url,
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: Some(url_params),
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    })
+    .expect("Received an error as HTTP Response")
+    .expect("Received an empty HTTP Response");
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+    let response_body: String = http_response
+        .body
+        .expect("Received an empty body as HTTP Response");
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Contract>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return JSON::from_str::<MarketChart>(&response_body).unwrap();
+    }
+    unsafe {
+        panic!(
+            "Unexpected HTTP response: {} with status: {}",
+            response_body, http_response.status
+        );
+    }
 
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
-// }
+}
 
-// pub fn asset_platforms(args: ArgsAssetPlatforms) -> Vec<AssetPlatform> {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
-//         url: "https://api.coingecko.com/api/v3/asset_platforms".to_string(),
-//         request: Some(HttpRequest {
-//             headers: None,
-//             url_params: url_params,
-//             response_type: HttpResponseType::TEXT,
-//             body: None,
-//         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+/***********************************************************************
+*                           ASSET PLATFORMS                            *
+***********************************************************************/
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
+pub fn asset_platforms(_: ArgsAssetPlatforms) -> Vec<AssetPlatform> {
+    let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
+        url: "https://api.coingecko.com/api/v3/asset_platforms".to_string(),
+        request: Some(HttpRequest {
+            headers: None,
+            url_params: None,
+            response_type: HttpResponseType::TEXT,
+            body: None,
+        }),
+    })
+    .expect("Received an error as HTTP Response")
+    .expect("Received an empty HTTP Response");
 
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+    let response_body: String = http_response
+        .body
+        .expect("Received an empty body as HTTP Response");
 
-//     // handle json rpc success
-//     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Vec<AssetPlatform>>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
-//     }
+    // handle json rpc success
+    if http_response.status >= 200 && http_response.status <= 299 {
+        return JSON::from_str::<Vec<AssetPlatform>>(&response_body).unwrap();
+    }
+    unsafe {
+        panic!(
+            "Unexpected HTTP response: {} with status: {}",
+            response_body, http_response.status
+        );
+    }
 
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
-// }
+}
 
-// pub fn coins_categories_list(args: ArgsCoinsCategoriesList) -> Vec<CategoryId> {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+/***********************************************************************
+*                              CATEGORIES                              *
+***********************************************************************/
+
+// pub fn coins_categories_list(_: ArgsCoinsCategoriesList) -> Vec<CategoryId> {
+//     let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
 //         url: "https://api.coingecko.com/api/v3/coins/categories/list".to_string(),
 //         request: Some(HttpRequest {
 //             headers: None,
-//             url_params: url_params,
+//             url_params: None,
 //             response_type: HttpResponseType::TEXT,
 //             body: None,
 //         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+//     })
+//     .expect("Received an error as HTTP Response")
+//     .expect("Received an empty HTTP Response");
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
-
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+//     let response_body: String = http_response
+//         .body
+//         .expect("Received an empty body as HTTP Response");
 
 //     // handle json rpc success
 //     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Vec<CategoryId>>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
+//         return JSON::from_str::<Vec<CategoryId>>(&response_body).unwrap();
 //     }
-
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
+//     unsafe {
+//         panic!(
+//             "Unexpected HTTP response: {} with status: {}",
+//             response_body, http_response.status
+//         );
+//     }
 // }
 
 // pub fn coins_categories(args: ArgsCoinsCategories) -> Vec<Category> {
-//     let url_params: Option<Vec<HttpUrlParam>> = Some(vec![HttpUrlParam {
-//         key: "order".to_string(),
-//         value: "args.name".to_string(),
-//     }]);
-//     let http_response: HttpResponse = match HttpModule::get(&http_module::ArgsGet {
+//     let mut url_params: Map<String, String> = Map::new();
+//     url_params.add("order", args.order);
+
+//     let http_response: HttpResponse = HttpModule::get(&http_module::ArgsGet {
 //         url: "https://api.coingecko.com/api/v3/coins/categories".to_string(),
 //         request: Some(HttpRequest {
 //             headers: None,
-//             url_params: url_params,
+//             url_params: Some(url_params),
 //             response_type: HttpResponseType::TEXT,
 //             body: None,
 //         }),
-//     }) {
-//         Ok(Some(v)) => v,
-//         Ok(None) => panic!("Did not receive HTTP response"),
-//         Err(e) => panic!("{}", e),
-//     };
+//     })
+//     .expect("Received an error as HTTP Response")
+//     .expect("Received an empty HTTP Response");
 
-//     // handle json rpc error
-//     if http_response.status == 400 || http_response.status == 404 || http_response.status == 500 {
-//         let response_body: String = match http_response.body {
-//             Some(v) => v,
-//             None => "An unknown error occurred!".to_string(),
-//         };
-
-//         panic!("Error {}: {}", http_response.status, response_body)
-//     }
+//     let response_body: String = http_response
+//         .body
+//         .expect("Received an empty body as HTTP Response");
 
 //     // handle json rpc success
 //     if http_response.status >= 200 && http_response.status <= 299 {
-//         return match http_response.body {
-//             Some(v) => JSON::from_str::<Vec<Category>>(&v).unwrap(),
-//             None => panic!(
-//                 "Missing response with successful HTTP status {}",
-//                 http_response.status
-//             ),
-//         };
+//         return JSON::from_str::<Vec<Category>>(&response_body).unwrap();
 //     }
-
-//     panic!(
-//         "Unexpected HTTP response with status: {}",
-//         http_response.status
-//     );
+//     unsafe {
+//         panic!(
+//             "Unexpected HTTP response: {} with status: {}",
+//             response_body, http_response.status
+//         );
+//     }
 // }
 
 // pub fn exchanges(args: ArgsExchanges) -> Vec<Exchange> {

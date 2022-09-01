@@ -1,4 +1,4 @@
-use polywrap_wasm_rs::{Map};
+use polywrap_wasm_rs::Map;
 
 pub fn bool_to_string(value: Option<bool>) -> Option<String> {
     match value {
@@ -9,19 +9,25 @@ pub fn bool_to_string(value: Option<bool>) -> Option<String> {
 }
 
 pub fn int_to_string(value: Option<i32>) -> Option<String> {
-  match value {
-      Some(v) => Some(v.to_string()),
-      None => None
-  }
+    match value {
+        Some(v) => Some(v.to_string()),
+        None => None,
+    }
 }
 
 #[derive(Copy, Clone)]
-pub enum MaybeOption<'a, T> where T:Clone {
+pub enum MaybeOption<'a, T>
+where
+    T: Clone,
+{
     OptVal(Option<&'a T>),
     Val(&'a T),
 }
 
-pub trait MaybeOptionTrait<T> where T:Clone {
+pub trait MaybeOptionTrait<T>
+where
+    T: Clone,
+{
     fn get_value(&self) -> MaybeOption<T>;
 }
 
@@ -49,13 +55,10 @@ impl<T: Clone, V: MaybeOptionTrait<T>> AddOptVal<T, V> for Map<String, T> {
                 if let Some(v) = val {
                     self.insert(key.to_string(), v.to_owned());
                 }
-            },
+            }
             MaybeOption::Val(val) => {
                 self.insert(key.to_string(), val.to_owned());
             }
         }
-        // if let Some(val) = value {
-        //     self.insert(key.to_string(), val);
-        // }
     }
 }

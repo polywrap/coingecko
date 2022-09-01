@@ -190,156 +190,156 @@ type Module {
   #                              CATEGORIES                              #
   ########################################################################
 
-  # coinsCategoriesList: [CategoryId!]!
-  # """ List all categories """
+  coinsCategoriesList: [CategoryId!]!
+  """ List all categories """
 
-  # coinsCategories(
-  #   """
-  #   List all categories with market data
-  #   """
-  #   order: String
-  # ): [Category!]!
+  coinsCategories(
+    """
+    List all categories with market data
+    """
+    order: String
+  ): [Category!]!
 
-#   ########################################################################
-#   #                              EXCHANGES                               #
-#   ########################################################################
+  ########################################################################
+  #                              EXCHANGES                               #
+  ########################################################################
 
-#   exchanges(
-#     """
-#     List all exchanges (Active with trading volumes)
-#     """
-#     per_page: Int
-#     page: String
-#   ): [Exchange!]!
+  exchanges(
+    """
+    List all exchanges (Active with trading volumes)
+    """
+    per_page: Int
+    page: String
+  ): [Exchange!]!
 
-#   exchangesList: [ExchangeId!]!
-#   """ List all supported markets id and name (no pagination required) """
+  exchangesList: [ExchangeId!]!
+  """ List all supported markets id and name (no pagination required) """
   
-#   exchange(
-#     """
-#     Get exchange volume in BTC and top 100 tickers only
-#     """
-#     id: String!
-#   ): Exchange!
+  exchange(
+    """
+    Get exchange volume in BTC and top 100 tickers only
+    """
+    id: String!
+  ): Exchange!
 
-#   exchangeTickers(
-#     """
-#     Get exchange tickers (paginated, 100 tickers per page)
-#     """
-#     id: String!
-#     coin_ids: String
-#     include_exchange_logo: String
-#     page: Int
-#     depth: String
-#     order: String
-#   ): Tickers!
+  exchangeTickers(
+    """
+    Get exchange tickers (paginated, 100 tickers per page)
+    """
+    id: String!
+    coin_ids: String
+    include_exchange_logo: String
+    page: Int
+    depth: String
+    order: String
+  ): Tickers!
 
-#   exchangeVolumeChart(
-#     """
-#     Get volume_chart data for a given exchange
-#     """
-#     id: String!
-#     days: Int!
-#   ): [[BigNumber!]!]!
+  exchangeVolumeChart(
+    """
+    Get volume_chart data for a given exchange
+    """
+    id: String!
+    days: Int!
+  ): [[BigNumber!]!]!
 
-#   ########################################################################
-#   #                               INDEXES                                #
-#   ########################################################################
+  ########################################################################
+  #                               INDEXES                                #
+  ########################################################################
 
-#   indexes(
-#     """
-#     List all market indexes
-#     """
-#     per_page: Int
-#     page: Int
-#   ): [Index!]!
+  indexes(
+    """
+    List all market indexes
+    """
+    per_page: Int
+    page: Int
+  ): [Index!]!
 
-#   marketIndexes(
-#     """
-#     get market index by market id and index id
-#     """
-#     market_id: String!
-#     id: String!
-#   ): MarketIndex!
+  marketIndexes(
+    """
+    get market index by market id and index id
+    """
+    market_id: String!
+    id: String!
+  ): MarketIndex!
 
-#   indexesList: [IndexId!]!
-#   """ list market indexes id and name """
+  """ list market indexes id and name """
+  indexesList: [IndexId!]!
 
-#   ########################################################################
-#   #                             DERIVATIVES                              #
-#   ########################################################################
+  ########################################################################
+  #                             DERIVATIVES                              #
+  ########################################################################
 
-#   derivatives(
-#     """
-#     List all derivative tickers
-#     """
-#     include_tickers: String
-#   ): [Derivative!]!
+  derivatives(
+    """
+    List all derivative tickers
+    """
+    include_tickers: String
+  ): [Derivative!]!
 
-#   derivativesExchanges(
-#     """
-#     List all derivative exchanges
-#     """
-#     order: String
-#     per_page: Int
-#     page: Int
-#   ): [DerivativeExchange!]!
+  derivativesExchanges(
+    """
+    List all derivative exchanges
+    """
+    order: String
+    per_page: Int
+    page: Int
+  ): [DerivativeExchange!]!
 
-#   derivativesExchange(
-#     """
-#     show derivative exchange data
-#     """
-#     id: String!
-#     include_tickers: String
-#   ): DerivativeExchange!
+  derivativesExchange(
+    """
+    show derivative exchange data
+    """
+    id: String!
+    include_tickers: String
+  ): DerivativeExchange!
 
-#   derivativesExchangesList: [DerivativeExchangeId!]!
-#   """ List all derivative exchanges name and identifier """
+  """ List all derivative exchanges name and identifier """
+  derivativesExchangesList: [DerivativeExchangeId!]!
 
-#   ########################################################################
-#   #                            EXCHANGE RATES                            #
-#   ########################################################################
+  ########################################################################
+  #                            EXCHANGE RATES                            #
+  ########################################################################
 
-#   exchangeRates: ExchangeRates!
-#   """ Get BTC-to-Currency exchange rates """
+  exchangeRates: ExchangeRates!
+  """ Get BTC-to-Currency exchange rates """
 
-#   ########################################################################
-#   #                                SEARCH                                #
-#   ########################################################################
+  ########################################################################
+  #                                SEARCH                                #
+  ########################################################################
 
-#   # search(
-#   #   """
-#   #   Search for coins, categories and markets on CoinGecko
-#   #   """
-#   #   query: String!
-#   # ): Search
+  search(
+    """
+    Search for coins, categories and markets on CoinGecko
+    """
+    query: String!
+  ): JSON!
 
-#   ########################################################################
-#   #                               TRENDING                               #
-#   ########################################################################
+  ########################################################################
+  #                               TRENDING                               #
+  ########################################################################
 
-#   searchTrending: SearchTrending!
-#   """ Get trending search coins (Top-7) on CoinGecko in the last 24 hours """
+  searchTrending: SearchTrending!
+  """ Get trending search coins (Top-7) on CoinGecko in the last 24 hours """
 
-#   ########################################################################
-#   #                                GLOBAL                                #
-#   ########################################################################
+  ########################################################################
+  #                                GLOBAL                                #
+  ########################################################################
 
 
-#   global: Global!
-#   """ Get cryptocurrency global data """
+  global: Global!
+  """ Get cryptocurrency global data """
 
-#   globalDecentralizedFinanceDefi: GlobalDefi!
-#   """ Get cryptocurrency global decentralized finance(defi) data """
+  globalDecentralizedFinanceDefi: GlobalDefi!
+  """ Get cryptocurrency global decentralized finance(defi) data """
 
-#   ########################################################################
-#   #                              COMPANIES                               #
-#   ########################################################################
+  ########################################################################
+  #                              COMPANIES                               #
+  ########################################################################
 
-#   companiesPublicTreasury(
-#     """
-#     Get public companies data
-#     """
-#     coin_id: String!
-#   ): CompaniesPublicTreasury!
+  companiesPublicTreasury(
+    """
+    Get public companies data
+    """
+    coin_id: String!
+  ): CompaniesPublicTreasury!
 }

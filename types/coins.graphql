@@ -8,7 +8,7 @@ type CoinListItem {
   id: String!
   symbol: String!
   name: String!
-  platforms: Map! @annotate(type: "Map<String!, String>!")
+  platforms: Map @annotate(type: "Map<String!, String>")
 }
 
 #---------------------------------------------
@@ -18,97 +18,103 @@ type SparklineIn7D {
     price: BigNumber!
 }
 
+type Roi {
+  times: BigNumber!
+  currency: String!
+  percentage: BigNumber!
+}
+
 type CoinMarketItem {
     id: String!
     symbol: String!
     name: String!
-    image: String!
+    image: String
     current_price: BigNumber
     market_cap: BigNumber
-    fully_diluted_valuation: JSON!
+    fully_diluted_valuation: BigNumber
     total_volume: BigNumber    
     #[serde(rename = "high_24h")]
-    high24_h: BigNumber,
+    high_24h: BigNumber
     #[serde(rename = "low_24h")]
-    low24_h: BigNumber,
+    low_24h: BigNumber
     #[serde(rename = "price_change_24h")]
-    price_change24_h: BigNumber,
+    price_change_24h: BigNumber
     #[serde(rename = "price_change_percentage_24h")]
-    price_change_percentage24_h: BigNumber,
+    price_change_percentage_24h: BigNumber
     #[serde(rename = "market_cap_change_24h")]
-    market_cap_change24_h: BigNumber,
+    market_cap_change_24h: BigNumber
     #[serde(rename = "market_cap_change_percentage_24h")]
-    market_cap_change_percentage24_h: BigNumber,
-    circulating_supply: BigNumber,
-    total_supply: BigNumber,
-    max_supply: BigNumber,
-    ath: BigNumber,
-    ath_change_percentage: BigNumber,
-    ath_date: String,
-    atl: BigNumber,
-    atl_change_percentage: BigNumber,
-    atl_date: String,
-    roi: JSON!,
-    last_updated: String,
+    market_cap_change_percentage_24h: BigNumber
+    circulating_supply: BigNumber
+    total_supply: BigNumber
+    max_supply: BigNumber
+    ath: BigNumber
+    ath_change_percentage: BigNumber
+    ath_date: String
+    atl: BigNumber
+    atl_change_percentage: BigNumber
+    atl_date: String
+    roi: Roi
+    last_updated: String
     #[serde(rename = "sparkline_in_7d")]
-    sparkline_in7_d: SparklineIn7D,
+    sparkline_in_7d: SparklineIn7D
     #[serde(rename = "price_change_percentage_14d_in_currency")]
-    price_change_percentage14_d_in_currency: BigNumber,
+    price_change_percentage_14d_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_1h_in_currency")]
-    price_change_percentage1_h_in_currency: BigNumber,
+    price_change_percentage_1h_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_1y_in_currency")]
-    price_change_percentage1_y_in_currency: BigNumber,
+    price_change_percentage_1y_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_200d_in_currency")]
-    price_change_percentage200_d_in_currency: BigNumber,
+    price_change_percentage_200d_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_24h_in_currency")]
-    price_change_percentage24_h_in_currency: BigNumber,
+    price_change_percentage_24h_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_30d_in_currency")]
-    price_change_percentage30_d_in_currency: BigNumber,
+    price_change_percentage_30d_in_currency: BigNumber
     #[serde(rename = "price_change_percentage_7d_in_currency")]
-    price_change_percentage7_d_in_currency: BigNumber,
+    price_change_percentage_7d_in_currency: BigNumber
 }
 
 # ---------------------------------------------
 #  /coins/{id}
 # ---------------------------------------------
 type CoinsItem implements CoinListItem {
-    asset_platform_id: JSON!,
+    asset_platform_id: JSON,
     block_time_in_minutes: BigNumber,
     hashing_algorithm: JSON,
-    categories: [String]!,
-    public_notice: JSON!,
-    additional_notices: [JSON!]!,
-    localization: Map! @annotate(type: "Map<String!, String>!")
-    description: Map! @annotate(type: "Map<String!, String>!"),
+    categories: [String],
+    public_notice: JSON,
+    additional_notices: [JSON!],
+    localization: Map @annotate(type: "Map<String!, String>")
+    description: Map @annotate(type: "Map<String!, String>"),
     links: Links,
     image: Image,
     country_origin: String,
-    genesis_date: JSON!,
+    genesis_date: JSON,
     contract_address: String,
-    sentiment_votes_up_percentage: JSON!,
-    sentiment_votes_down_percentage: JSON!,
-    market_cap_rank: JSON!,
-    coingecko_rank: JSON!,
-    coingecko_score: JSON!,
-    developer_score: JSON!,
-    community_score: JSON!,
-    liquidity_score: JSON!,
-    ic_interest_score: JSON!,
+    sentiment_votes_up_percentage: JSON,
+    sentiment_votes_down_percentage: JSON,
+    market_cap_rank: JSON,
+    coingecko_rank: JSON,
+    coingecko_score: JSON,
+    developer_score: JSON,
+    community_score: JSON,
+    liquidity_score: JSON,
+    ic_interest_score: JSON,
     market_data: MarketData,
     community_data: CommunityData,
     developer_data: DeveloperData,
     public_interest_stats: PublicInterestStats,
     status_updates: [JSON],
     last_updated: String,
-    tickers: [Ticker!],
+    tickers: [Ticker],
 }
 
 type MarketData {
     current_price: Map! @annotate(type: "Map<String!, BigNumber>!"),
-    total_value_locked: JSON!,
-    mcap_to_tvl_ratio: JSON!,
-    fdv_to_tvl_ratio: JSON!,
-    roi: JSON!,
+    total_value_locked: BigNumber,
+    mcap_to_tvl_ratio: BigNumber,
+    fdv_to_tvl_ratio: BigNumber,
+    roi: Roi,
     ath: Map! @annotate(type: "Map<String!, BigNumber>!"),
     ath_change_percentage: Map! @annotate(type: "Map<String!, BigNumber>!"),
     ath_date: Map! @annotate(type: "Map<String!, String>!"),
@@ -116,60 +122,60 @@ type MarketData {
     atl_change_percentage: Map! @annotate(type: "Map<String!, BigNumber>!"),
     atl_date: Map! @annotate(type: "Map<String!, String>!"),
     market_cap: Map! @annotate(type: "Map<String!, BigNumber>!"),
-    market_cap_rank: JSON!,
+    market_cap_rank: JSON,
     fully_diluted_valuation: Map! @annotate(type: "Map<String!, BigNumber>!"),
     total_volume: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "high_24h")]
-    high24_h: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    high_24h: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "low_24h")]
-    low24_h: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    low_24h: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_24h")]
-    price_change24_h: BigNumber,
+    price_change_24h: BigNumber,
     #[serde(rename = "price_change_percentage_24h")]
-    price_change_percentage24_h: BigNumber,
+    price_change_percentage_24h: BigNumber,
     #[serde(rename = "price_change_percentage_7d")]
-    price_change_percentage7_d: BigNumber,
+    price_change_percentage_7d: BigNumber,
     #[serde(rename = "price_change_percentage_14d")]
-    price_change_percentage14_d: BigNumber,
+    price_change_percentage_14d: BigNumber,
     #[serde(rename = "price_change_percentage_30d")]
-    price_change_percentage30_d: BigNumber,
+    price_change_percentage_30d: BigNumber,
     #[serde(rename = "price_change_percentage_60d")]
-    price_change_percentage60_d: BigNumber,
+    price_change_percentage_60d: BigNumber,
     #[serde(rename = "price_change_percentage_200d")]
-    price_change_percentage200_d: BigNumber,
+    price_change_percentage_200d: BigNumber,
     #[serde(rename = "price_change_percentage_1y")]
-    price_change_percentage1_y: BigNumber,
+    price_change_percentage_1y: BigNumber,
     #[serde(rename = "market_cap_change_24h")]
-    market_cap_change24_h: BigNumber,
+    market_cap_change_24h: BigNumber,
     #[serde(rename = "market_cap_change_percentage_24h")]
-    market_cap_change_percentage24_h: BigNumber,
+    market_cap_change_percentage_24h: BigNumber,
     #[serde(rename = "price_change_24h_in_currency")]
-    price_change24_h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_24h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_1h_in_currency")]
-    price_change_percentage1_h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_1h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_24h_in_currency")]
-    price_change_percentage24_h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_24h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_7d_in_currency")]
-    price_change_percentage7_d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_7d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_14d_in_currency")]
-    price_change_percentage14_d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_14d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_30d_in_currency")]
-    price_change_percentage30_d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_30d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_60d_in_currency")]
-    price_change_percentage60_d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_60d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_200d_in_currency")]
-    price_change_percentage200_d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_200d_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "price_change_percentage_1y_in_currency")]
-    price_change_percentage1_y_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    price_change_percentage_1y_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "market_cap_change_24h_in_currency")]
-    market_cap_change24_h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    market_cap_change_24h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     #[serde(rename = "market_cap_change_percentage_24h_in_currency")]
-    market_cap_change_percentage24_h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
+    market_cap_change_percentage_24h_in_currency: Map! @annotate(type: "Map<String!, BigNumber>!"),
     total_supply: BigNumber,
     max_supply: BigNumber,
     circulating_supply: BigNumber,
     #[serde(rename = "sparkline_7d")]
-    sparkline7_d: Sparkline7D,
+    sparkline_7d: Sparkline7D,
     last_updated: String,
 }
 
@@ -183,16 +189,16 @@ type History {
   name: String!
   localization: Map! @annotate(type: "Map<String!, String>!")
   image: Image!
-  market_data: HistoryMarketData!
+  market_data: HistoryMarketData
   community_data: CommunityData
   developer_data: DeveloperData
   public_interest_stats: PublicInterestStats
 }
 
 type HistoryMarketData {
-  current_price: Map! @annotate(type: "Map<String!, BigNumber>!")
-  market_cap: Map! @annotate(type: "Map<String!, BigNumber>!")
-  total_volume: Map! @annotate(type: "Map<String!, BigNumber>!")
+  current_price: Map @annotate(type: "Map<String!, BigNumber>")
+  market_cap: Map @annotate(type: "Map<String!, BigNumber>")
+  total_volume: Map @annotate(type: "Map<String!, BigNumber>")
 }
 
 type MarketChart {
@@ -202,32 +208,32 @@ type MarketChart {
 }
 
 type Contract implements CoinListItem {
-    asset_platform_id: String!
-    block_time_in_minutes: Int!
+    asset_platform_id: String
+    block_time_in_minutes: BigNumber
     hashing_algorithm: JSON!
-    categories: [String!]!
-    ic_notice: JSON!
+    categories: [String!]
+    public_notice: JSON
     additional_notices: [JSON]
-    localization: Map! @annotate(type: "Map<String!, String>!")
-    description: Map! @annotate(type: "Map<String!, String>!")
-    links: Links!
-    image: Image!
-    country_origin: String!
-    genesis_date: JSON!
-    contract_address: String
-    sentiment_votes_up_percentage: BigNumber!
-    sentiment_votes_down_percentage: BigNumber!
-    market_cap_rank: Int!
-    coingecko_rank: Int!
-    coingecko_score: BigNumber!
-    developer_score: Int!
-    community_score: BigNumber!
-    liquidity_score: BigNumber!
-    public_interest_score: BigNumber!
-    market_data: MarketData!
-    community_data: CommunityData!
-    developer_data: DeveloperData!
-    public_interest_stats: PublicInterestStats!
+    localization: Map @annotate(type: "Map<String!, String>")
+    description: Map @annotate(type: "Map<String!, String>")
+    links: Links
+    image: Image
+    country_origin: String
+    genesis_date: String
+    contract_address: String!
+    sentiment_votes_up_percentage: BigNumber
+    sentiment_votes_down_percentage: BigNumber
+    market_cap_rank: Int
+    coingecko_rank: Int
+    coingecko_score: BigNumber
+    developer_score: BigNumber
+    community_score: BigNumber
+    liquidity_score: BigNumber
+    public_interest_score: BigNumber
+    market_data: MarketData
+    community_data: CommunityData
+    developer_data: DeveloperData
+    public_interest_stats: PublicInterestStats
     status_updates: [JSON!]
     last_updated: String!
     tickers: [Ticker]
@@ -250,8 +256,8 @@ type Category {
     name: String!
     market_cap: BigNumber!
     #[serde(rename = "market_cap_change_24h")]
-    market_cap_change24_h: BigNumber!
+    market_cap_change_24h: BigNumber!
     #[serde(rename = "volume_24h")]
-    volume24_h: BigNumber!
+    volume_24h: BigNumber!
     updated_at: String!
 }

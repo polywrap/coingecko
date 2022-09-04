@@ -154,7 +154,7 @@ pub fn coin_tickers(args: ArgsCoinTickers) -> Tickers {
 
 pub fn coin_history(args: ArgsCoinHistory) -> History {
     let mut url_params: Map<String, String> = Map::new();
-    url_params.add("data", args.date);
+    url_params.add("date", args.date);
     url_params.add("localization", args.localization);
 
     let url = unsafe {

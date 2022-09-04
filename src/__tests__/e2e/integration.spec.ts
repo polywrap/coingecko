@@ -24,9 +24,14 @@ describe("Coingecko", () => {
 
   test("simplePrice", async () => {
     const simplePrice = await Coingecko_Module.simplePrice({ids: "bitcoin", vs_currencies: "usd"}, client, wrapperUri);
-    console.log(simplePrice.data)
-    // expect(simplePrice.error).toBeFalsy();
-    // expect(simplePrice.data).toBeTruthy();
+    expect(simplePrice.error).toBeFalsy();
+    expect(simplePrice.data).toBeTruthy();
+  });
+
+  test("simpleTokenPrice", async () => {
+    const simplePrice = await Coingecko_Module.simpleTokenPrice({id: "ethereum", contract_addresses: "0x0D8775F648430679A709E98d2b0Cb6250d2887EF", vs_currencies: "usd"}, client, wrapperUri);
+    expect(simplePrice.error).toBeFalsy();
+    expect(simplePrice.data).toBeTruthy();
   })
 
   test("simpleSupportedVsCurrencies", async () => {
@@ -45,18 +50,8 @@ describe("Coingecko", () => {
 
   test("coinMarkets", async () => {
     const coinMarkets = await Coingecko_Module.coinsMarkets({vs_currency: "usd", ids: "ethereum"}, client, wrapperUri);
-    
-    console.log(coinMarkets);
     expect(coinMarkets.error).toBeFalsy();
     expect(coinMarkets.data).toBeTruthy();
     expect(coinMarkets.data?.length).toBeGreaterThan(0);
-
-    console.log(coinMarkets);
   });
-
-  // test("coin", async() => {
-  //   const coin = await Coingecko_Module.coin({id: "bitcoin"}, client, wrapperUri);
-
-  //   console.log(coin);
-  // });
 });

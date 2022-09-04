@@ -300,6 +300,7 @@ type Module {
   #                            EXCHANGE RATES                            #
   ########################################################################
 
+  # FIXME: issue _type -> serde rename
   exchangeRates: ExchangeRates!
   """ Get BTC-to-Currency exchange rates """
 

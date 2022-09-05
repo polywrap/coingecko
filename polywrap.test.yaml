@@ -1,0 +1,210 @@
+format: "0.1.0"
+name: coingecko
+# validation: ./workflows/validator.mock.cue
+jobs:
+  ping:
+    steps:
+      - uri: wrap://fs/./build
+        method: ping
+  simple:
+    jobs:
+      simple_price:
+        steps:
+          - uri: wrap://fs/./build
+            method: simplePrice
+            args:
+              ids: bitcoin
+              vs_currencies: usd
+      simple_token_price:
+        steps:
+          - uri: wrap://fs/./build
+            method: simpleTokenPrice
+            args:
+              id: ethereum
+              contract_addresses: "0x0D8775F648430679A709E98d2b0Cb6250d2887EF"
+              vs_currencies: usd
+      supported_vs_currencies:
+        steps:
+          - uri: wrap://fs/./build
+            method: simpleSupportedVsCurrencies
+  coins:
+    jobs:
+      coins_list:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinsList
+      coins_markets:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinsMarkets
+            args:
+              vs_currency: "usd"
+      coin:
+        steps:
+          - uri: wrap://fs/./build
+            method: coin
+            args:
+              id: "bitcoin"
+      coin_tickers:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinTickers
+            args:
+              id: "bitcoin"
+      coin_history:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinHistory
+            args:
+              id: "bitcoin"
+              date: "27-08-2018"
+      coin_market_chart:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinMarketChart
+            args:
+              id: "bitcoin"
+              vs_currency: "usd"
+              days: "1"
+      coin_market_chart_range:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinMarketChartRange
+            args:
+              id: "bitcoin"
+              vs_currency: "usd"
+              from: "1392577232"
+              to: "1422577232"
+      coin_ohlc:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinOhlc
+            args:
+              id: "ethereum"
+              vs_currency: "usd"
+              days: "1"
+  contract:
+    jobs:
+      coin_contract:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinContract
+            args:
+              id: "ethereum"
+              contract_address: "0x0D8775F648430679A709E98d2b0Cb6250d2887EF"
+      coin_contract_market_chart:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinContractMarketChart
+            args:
+              id: "ethereum"
+              contract_address: "0x0D8775F648430679A709E98d2b0Cb6250d2887EF"
+              vs_currency: "usd"
+              days: "1"
+      coin_contract_market_chart_range:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinContractMarketChartRange
+            args:
+              id: "ethereum"
+              contract_address: "0x0D8775F648430679A709E98d2b0Cb6250d2887EF"
+              vs_currency: "usd"
+              from: "1392577232"
+              to: "1422577232"
+  asset_platforms:
+    steps:
+      - uri: wrap://fs/./build
+        method: assetPlatforms
+  categories:
+    jobs:
+      coins_categories_list:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinsCategoriesList
+      coins_categories:
+        steps:
+          - uri: wrap://fs/./build
+            method: coinsCategories
+  exchanges:
+    jobs:
+      exchanges:
+        steps:
+          - uri: wrap://fs/./build
+            method: exchanges
+      exchanges_list:
+        steps:
+          - uri: wrap://fs/./build
+            method: exchangesList
+      exchange:
+        steps:
+          - uri: wrap://fs/./build
+            method: exchange
+            args:
+              id: "bitforex"
+      exchange_tickers:
+        steps:
+          - uri: wrap://fs/./build
+            method: exchangeTickers
+            args:
+              id: "bitforex"
+      # exchange_rates: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: exchangeRates
+  indexes:
+    jobs:
+      indexes:
+        steps:
+          - uri: wrap://fs/./build
+            method: indexes
+      # market_indexes: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: marketIndexes
+      #       args:
+      #         market_id: "bitforex_futures"
+      #         id: "ETH"
+      indexes_list:
+        steps:
+          - uri: wrap://fs/./build
+            method: indexesList
+  derivatives:
+    jobs:
+      # derivatives: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: derivatives
+      derivatives_exchanges:
+        steps:
+          - uri: wrap://fs/./build
+            method: derivativesExchanges
+      derivatives_exchange:
+        steps:
+          - uri: wrap://fs/./build
+            method: derivativesExchange
+            args:
+              id: "binance_futures"
+      derivatives_exchanges_list:
+        steps:
+          - uri: wrap://fs/./build
+            method: derivativesExchangesList
+  search_trending:
+    steps:
+      - uri: wrap://fs/./build
+        method: searchTrending
+  global:
+    jobs:
+      global:
+        steps:
+          - uri: wrap://fs/./build
+            method: global
+      global_decentralized_finance_defi:
+        steps:
+          - uri: wrap://fs/./build
+            method: globalDecentralizedFinanceDefi
+  companies_public_treasury:
+    steps:
+      - uri: wrap://fs/./build
+        method: companiesPublicTreasury
+        args:
+          coin_id: "bitcoin"

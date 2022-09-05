@@ -4,22 +4,16 @@ type Image {
     large: String
 }
 
-type CurrentPrice implements TokenNumber {}
-
-type MarketCap implements TokenNumber {}
-
-type TotalVolume implements TokenNumber {}
-
 type CommunityData {
     facebook_likes: BigNumber
     twitter_followers: BigNumber
     #[serde(rename = "reddit_average_posts_48h")]
-    reddit_average_posts48_h: BigNumber
+    reddit_average_posts_48h: BigNumber
     #[serde(rename = "reddit_average_comments_48h")]
-    reddit_average_comments48_h: BigNumber
+    reddit_average_comments_48h: BigNumber
     reddit_subscribers: BigNumber
     #[serde(rename = "reddit_accounts_active_48h")]
-    reddit_accounts_active48_h: JSON
+    reddit_accounts_active_48h: JSON
     telegram_channel_user_count: JSON
 }
 
@@ -32,11 +26,11 @@ type DeveloperData {
     pull_requests_merged: BigNumber
     pull_request_contributors: BigNumber
     #[serde(rename = "code_additions_deletions_4_weeks")]
-    code_additions_deletions4_weeks: CodeAdditionsDeletions4Weeks
+    code_additions_deletions_4_weeks: CodeAdditionsDeletions4Weeks
     #[serde(rename = "commit_count_4_weeks")]
     commit_count4_weeks: BigNumber
     #[serde(rename = "last_4_weeks_commit_activity_series")]
-    last4_weeks_commit_activity_series: [BigNumber!]
+    last_4_weeks_commit_activity_series: [BigNumber!]
 }
 
 type PublicInterestStats {
@@ -79,8 +73,8 @@ type Ticker {
     market: Market!
     last: BigNumber!
     volume: BigNumber!
-    converted_last: ConvertedLast!
-    converted_volume: ConvertedVolume!
+    converted_last: Map! @annotate(type: "Map<String!, BigNumber>!")
+    converted_volume: Map! @annotate(type: "Map<String!, BigNumber>!")
     cost_to_move_up_usd: BigNumber
     cost_to_move_down_usd: BigNumber
     trust_score: String
@@ -101,18 +95,6 @@ type Market {
     identifier: String!
     has_trading_incentive: Boolean!
     logo: String
-}
-
-type ConvertedLast {
-    btc: BigNumber!
-    eth: BigNumber!
-    usd: BigNumber!
-}
-
-type ConvertedVolume {
-    btc: BigNumber!
-    eth: BigNumber!
-    usd: BigNumber!
 }
 
 type StatusUpdates {
@@ -136,135 +118,4 @@ type Project {
     name: String
     symbol: String
     image: Image
-}
-
-
-type TokenNumber {
-  aed: BigNumber,
-  ars: BigNumber,
-  aud: BigNumber,
-  bch: BigNumber,
-  bdt: BigNumber,
-  bhd: BigNumber,
-  bmd: BigNumber,
-  bnb: BigNumber,
-  brl: BigNumber,
-  btc: BigNumber,
-  cad: BigNumber,
-  chf: BigNumber,
-  clp: BigNumber,
-  cny: BigNumber,
-  czk: BigNumber,
-  dkk: BigNumber,
-  dot: BigNumber,
-  eos: BigNumber,
-  eth: BigNumber,
-  eur: BigNumber,
-  gbp: BigNumber,
-  hkd: BigNumber,
-  huf: BigNumber,
-  idr: BigNumber,
-  ils: BigNumber,
-  inr: BigNumber,
-  jpy: BigNumber,
-  krw: BigNumber,
-  kwd: BigNumber,
-  lkr: BigNumber,
-  ltc: BigNumber,
-  mmk: BigNumber,
-  mxn: BigNumber,
-  myr: BigNumber,
-  ngn: BigNumber,
-  nok: BigNumber,
-  nzd: BigNumber,
-  php: BigNumber,
-  pkr: BigNumber,
-  pln: BigNumber,
-  rub: BigNumber,
-  sar: BigNumber,
-  sek: BigNumber,
-  sgd: BigNumber,
-  thb: BigNumber,
-  #[serde(rename = "try")]
-  try_field: BigNumber,
-  twd: BigNumber,
-  uah: BigNumber,
-  usd: BigNumber,
-  vef: BigNumber,
-  vnd: BigNumber,
-  xag: BigNumber,
-  xau: BigNumber,
-  xdr: BigNumber,
-  xlm: BigNumber,
-  xrp: BigNumber,
-  yfi: BigNumber,
-  zar: BigNumber,
-  bits: BigNumber,
-  link: BigNumber,
-  sats: BigNumber,
-}
-
-type TokenString {
-  aed: String,
-  ars: String,
-  aud: String,
-  bch: String,
-  bdt: String,
-  bhd: String,
-  bmd: String,
-  bnb: String,
-  brl: String,
-  btc: String,
-  cad: String,
-  chf: String,
-  clp: String,
-  cny: String,
-  czk: String,
-  dkk: String,
-  dot: String,
-  eos: String,
-  eth: String,
-  eur: String,
-  gbp: String,
-  hkd: String,
-  huf: String,
-  idr: String,
-  ils: String,
-  inr: String,
-  jpy: String,
-  krw: String,
-  kwd: String,
-  lkr: String,
-  ltc: String,
-  mmk: String,
-  mxn: String,
-  myr: String,
-  ngn: String,
-  nok: String,
-  nzd: String,
-  php: String,
-  pkr: String,
-  pln: String,
-  rub: String,
-  sar: String,
-  sek: String,
-  sgd: String,
-  thb: String,
-  #[serde(rename = "try")]
-  try_field: String,
-  twd: String,
-  uah: String,
-  usd: String,
-  vef: String,
-  vnd: String,
-  xag: String,
-  xau: String,
-  xdr: String,
-  xlm: String,
-  xrp: String,
-  yfi: String,
-  zar: String,
-  bits: String,
-  link: String,
-  sats: String,
 }

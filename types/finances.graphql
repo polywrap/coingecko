@@ -19,8 +19,8 @@ type FinanceProduct {
     borrow_rate_percentage: String
     number_duration: BigNumber
     length_duration: BigNumber
-    start_at: Int!
-    end_at: Int!
-    value_at: Int!
-    redeem_at: Int!
+    start_at: BigInt!
+    end_at: BigInt!
+    value_at: BigInt!
+    redeem_at: BigInt!
 }

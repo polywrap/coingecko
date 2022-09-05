@@ -17,8 +17,8 @@ type Derivative {
     funding_rate: BigNumber!
     open_interest: BigNumber
     volume_24h: BigNumber!
-    last_traded_at: Int!
-    expired_at: Int
+    last_traded_at: BigInt
+    expired_at: BigInt
 }
 
 type DerivativeExchange {
@@ -65,8 +65,8 @@ type DerivativeExchangeTicker {
     h24_volume: BigNumber!
     converted_volume: Map! @annotate(type: "Map<String!, BigNumber>!")
     converted_last: Map! @annotate(type: "Map<String!, BigNumber>!")
-    last_traded: BigNumber!
-    expired_at: BigNumber
+    last_traded: BigInt
+    expired_at: BigInt
 }
 
 

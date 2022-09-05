@@ -147,33 +147,33 @@ jobs:
             method: exchangeTickers
             args:
               id: "bitforex"
-      exchange_rates:
-        steps:
-          - uri: wrap://fs/./build
-            method: exchangeRates
+      # exchange_rates: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: exchangeRates
   indexes:
     jobs:
       indexes:
         steps:
           - uri: wrap://fs/./build
             method: indexes
-      market_indexes: #FIXME
-        steps:
-          - uri: wrap://fs/./build
-            method: marketIndexes
-            args:
-              market_id: "bitforex_futures"
-              id: "ETH"
+      # market_indexes: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: marketIndexes
+      #       args:
+      #         market_id: "bitforex_futures"
+      #         id: "ETH"
       indexes_list:
         steps:
           - uri: wrap://fs/./build
             method: indexesList
   derivatives:
     jobs:
-      derivatives: #FIXME
-        steps:
-          - uri: wrap://fs/./build
-            method: derivatives
+      # derivatives: #FIXME
+      #   steps:
+      #     - uri: wrap://fs/./build
+      #       method: derivatives
       derivatives_exchanges:
         steps:
           - uri: wrap://fs/./build

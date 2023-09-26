@@ -5,5 +5,5 @@ project:
 source:
   schema: ./schema.graphql
   import_abis:
-    - uri: wrap://ens/coingecko.defiwrapper.eth
+    - uri: wrap://wrapscan.io/polywrap/coingecko@1.0
       abi: ../../../build/wrap.info

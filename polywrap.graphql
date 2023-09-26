@@ -10,7 +10,7 @@
 #import { AssetPlatform } from "./types/asset_platform.graphql"
 #import { Tickers } from "./types/common.graphql"
 
-#import { Module } into Http from "wrap://ens/http.polywrap.eth"
+#import { Module } into Http from "wrapscan.io/polywrap/http@1"
 
 """ CoinGecko API V3 """
 type Module {

@@ -43,7 +43,6 @@ checkPing().then(() => {
   console.log("Done!");
 });
 ```
-```
 
 ## CoinGecko Wrap Overview
 

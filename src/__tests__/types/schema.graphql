@@ -1,1 +1,1 @@
-#import * into Coingecko from "ens/coingecko.defiwrapper.eth"
+#import * into Coingecko from "wrap://wrapscan.io/polywrap/coingecko@1.0"

@@ -1,12 +1,12 @@
 import {
-  PolywrapClientConfig,
+  CoreClientConfig,
 } from "@polywrap/client-js";
 
 import nock from "nock";
 
 export async function getClientConfig(
-  defaultConfigs: Partial<PolywrapClientConfig>
-): Promise<Partial<PolywrapClientConfig>> {
+  defaultConfigs: Partial<CoreClientConfig>
+): Promise<Partial<CoreClientConfig>> {
   for (const request of requests) {
     nock("https://api.coingecko.com")
       .get(request.url)

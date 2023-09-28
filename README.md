@@ -24,6 +24,8 @@ npm install @polywrap/client-js
 Interacting with the SDK is simple. Here's a basic example that shows how to ping the CoinGecko API:
 
 ```javascript
+import {PolywrapClient} from "@polywrap/client-js";
+
 async function checkPing() {
   const args = {}; // Ping doesn't require any arguments
   const client = new PolywrapClient();

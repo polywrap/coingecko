@@ -461,6 +461,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "coingecko"
+version = "1.0.0"
+dependencies = [
+ "polywrap",
+ "polywrap-wasm-rs",
+ "polywrap_msgpack_serde",
+ "serde",
+]
+
+[[package]]
 name = "coins-bip32"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2085,16 +2095,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c5f195fe497f702db0f318b07fdd68edb16955aed830df8363d837542f8f935a"
 dependencies = [
  "wasm-bindgen",
-]
-
-[[package]]
-name = "json-rpc"
-version = "0.1.1"
-dependencies = [
- "polywrap",
- "polywrap-wasm-rs",
- "polywrap_msgpack_serde",
- "serde",
 ]
 
 [[package]]

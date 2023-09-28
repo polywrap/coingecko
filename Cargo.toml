@@ -1,9 +1,9 @@
 [package]
-name = "json-rpc"
-version = "0.1.1"
-description = "A Wasm wrapper written in Rust that uses the Polywrap HTTP plugin wrapper to perform JSON RPC queries."
-authors = ["Kris Bitney <kris@polywrap.io>"]
-repository = "https://github.com/polywrap/demos"
+name = "coingecko"
+version = "1.0.0"
+description = "Coingecko Wrap"
+authors = ["Niraj Kamdar <niraj@polywrap.io>"]
+repository = "https://github.com/polywrap/coingecko"
 license = "MIT"
 edition = "2021"
 

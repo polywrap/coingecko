@@ -1,5 +1,5 @@
 {
-  "name": "coingecko-rs",
+  "name": "coingecko",
   "description": "Coingecko Rust Wrapper",
   "private": true,
   "version": "0.1.2",
